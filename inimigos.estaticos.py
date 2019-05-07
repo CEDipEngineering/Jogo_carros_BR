@@ -4,9 +4,6 @@ Created on Mon May  6 22:00:55 2019
 
 @author: André Luis Silva Lop
 """
-#loading background
-
-background = pygame.image.load(path.join(Assets_dir, 'road.png')).convert()
 
 
 
@@ -53,3 +50,11 @@ class Inimigo(pygame.sprite.Sprite):
             self.speedx = random.randrange(-3, 3)
             
             self.speedy = random.randrange(2, 9)
+            
+            
+inimgs = pygame.sprite.Group()
+
+for i in range(10):
+    a = Inimigo()
+    all_sprites.add(a)
+    inimigs.add(a)
