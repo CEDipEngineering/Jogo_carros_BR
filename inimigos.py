@@ -5,24 +5,26 @@ Created on Mon May  6 22:00:55 2019
 @author: André Luis Silva Lop
 """
 
+import pygame
+import random
 
 
 class Inimigo(pygame.sprite.Sprite):
     
     # Construtor da classe.
-    def __init__(self):
+    def __init__(self, img_path):
         
         # Class Constructor
         pygame.sprite.Sprite.__init__(self)
         
         # Loading background image
-        inim_img = pygame.image.load(path.join(Assets_dir, "enemy1.png")).convert()
+        inim_img = img_path
         
         # Scaling #precisa ver a escala do fundo
         self.image = pygame.transform.scale(inim_img, (50, 38))
         
         # no Back
-        self.image.set_colorkey(BLACK)
+        self.image.set_colorkey((0,0,0))
         
         # Positionig details
         self.rect = self.image.get_rect()
@@ -51,10 +53,3 @@ class Inimigo(pygame.sprite.Sprite):
             
             self.speedy = random.randrange(2, 9)
             
-            
-inimgs = pygame.sprite.Group()
-
-for i in range(10):
-    a = Inimigo()
-    all_sprites.add(a)
-    inimigs.add(a)

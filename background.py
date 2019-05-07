@@ -4,6 +4,8 @@ Created on Mon May  6 22:39:55 2019
 
 @author: André Luis Silva Lop
 """
+import pygame
+from os import path
 
 # Inicialização do Pygame.
 pygame.init()

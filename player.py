@@ -77,12 +77,31 @@ class Player (pygame.sprite.Sprite):
 #            self.acc+=0.9
 #        else:
 #            self.acc = 0
-        
+
+
+from inimigos import Inimigo
+from bullet import Bullet       
+
+
 player = Player()
 clock = pygame.time.Clock()
 #background = pygame.Rect(0,0,WIDTH,HEIGHT)
-all_sprites = pygame.sprite.Group()
+
+all_sprites = pygame.sprite.Group()            
+inimigos = pygame.sprite.Group()
+
+
+for i in range(10):
+    a = Inimigo(pygame.image.load(path.join(img_dir, "Temp_car_sprite.png")).convert())
+    all_sprites.add(a)
+    inimigos.add(a)
+    
+    
 all_sprites.add(player)
+
+
+
+
 def Main():
     try:
         running = True
@@ -103,6 +122,9 @@ def Main():
                         player.acc -= player.power
                     if event.key == pygame.K_RIGHT:
                         player.acc += player.power
+                    if event.key == pygame.K_SPACE:
+                        b = Bullet(bullet_img, player.rect.centerx, player.rect.bottom, player.speed)
+                        all_sprites.add(b)
     
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_LEFT:
