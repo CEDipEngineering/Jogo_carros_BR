@@ -8,16 +8,34 @@ import pygame
 from os import path
 import json
 
+
+pygame.init()
+
+with open('consts.txt', 'r') as consts_txt:
+    conteudo = consts_txt.read()
+    consts = json.loads(conteudo)
+
+FPS = consts['FPS']
+HEIGHT = consts['HEIGHT']
+WIDTH = consts['WIDTH']
+BLACK = consts['BLACK']
+RED = consts['RED']
+img_dir = path.join(path.dirname(__file__), 'Assets')
+img_dir = path.join(path.dirname(__file__),'img')
+
+
+
+
+
 def load_assets(img_dir):
     assets = {}
-    assets['player_img'] = 
-
+    assets['player_img'] = pygame.image.load(path.join(img_dir, 'Red1.png')).convert()
+    assets['bullet_img'] = pygame.image.load(path.join(img_dir, 'Temp_car_sprite.png')).convert()
     return assets
-pygame.init()
 
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-assets = load_assets()
+assets = load_assets(img_dir)
 class Player (pygame.sprite.Sprite):
     
     def __init__(self):
@@ -118,7 +136,7 @@ def Main():
                     if event.key == pygame.K_RIGHT:
                         player.acc += player.power
                     if event.key == pygame.K_SPACE:
-                        b = Bullet(bullet_img, player.rect.centerx, player.rect.bottom, player.speed)
+                        b = Bullet(assets['bullet_img'], player.rect.centerx, player.rect.bottom, player.speed)
                         all_sprites.add(b)
     
                 if event.type == pygame.KEYUP:
