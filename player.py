@@ -9,7 +9,7 @@ from os import path
 
 pygame.init()
 
-img_dir = path.join(path.dirname(__file__), 'Assets')
+img_dir = path.join(path.dirname(__file__), 'Assets\img')
 
 WIDTH = 480 # Largura da tela
 HEIGHT = 600 # Altura da tela
@@ -33,8 +33,8 @@ class Player (pygame.sprite.Sprite):
         self.size = 15
         self.acc = 0
         self.speed = 0
-        self.power = 0.2
-        self.SpeedLimit = 5
+        self.power = 0.15
+        self.SpeedLimit = 4
         self.xpos = WIDTH / 2
         self.rect.centerx = self.xpos
         self.rect.bottom = HEIGHT - self.size
@@ -79,42 +79,44 @@ clock = pygame.time.Clock()
 #background = pygame.Rect(0,0,WIDTH,HEIGHT)
 all_sprites = pygame.sprite.Group()
 all_sprites.add(player)
-try:
-    running = True
-    while running:
-        
-        # Ajusta a velocidade do jogo.
-        clock.tick(FPS)
-        
-        # Processa os eventos (mouse, teclado, botão, etc).
-        for event in pygame.event.get():
+def Main():
+    try:
+        running = True
+        while running:
             
-            # Verifica se foi fechado
-            if event.type == pygame.QUIT:
-                running = False
+            # Ajusta a velocidade do jogo.
+            clock.tick(FPS)
             
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT:
-                    player.acc -= player.power
-                if event.key == pygame.K_RIGHT:
-                    player.acc += player.power
-
-            if event.type == pygame.KEYUP:
-                if event.key == pygame.K_LEFT:
-                    player.acc = 0
-                if event.key == pygame.K_RIGHT:
-                    player.acc = 0
-                    
-        all_sprites.update()
-        
-        screen.fill((87,87,87))
-#        screen.blit(background)
-        
-        all_sprites.draw(screen)
-        
-        
-        # Depois de desenhar tudo, inverte o display.
-        pygame.display.flip()
-        
-finally:
-    pygame.quit()
+            # Processa os eventos (mouse, teclado, botão, etc).
+            for event in pygame.event.get():
+                
+                # Verifica se foi fechado
+                if event.type == pygame.QUIT:
+                    running = False
+                
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_LEFT:
+                        player.acc -= player.power
+                    if event.key == pygame.K_RIGHT:
+                        player.acc += player.power
+    
+                if event.type == pygame.KEYUP:
+                    if event.key == pygame.K_LEFT:
+                        player.acc = 0
+                    if event.key == pygame.K_RIGHT:
+                        player.acc = 0
+                        
+            all_sprites.update()
+            
+            screen.fill((87,87,87))
+    #        screen.blit(background)
+            
+            all_sprites.draw(screen)
+            
+            
+            # Depois de desenhar tudo, inverte o display.
+            pygame.display.flip()
+            
+    finally:
+        pygame.quit()
+Main()
