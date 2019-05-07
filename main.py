@@ -6,30 +6,25 @@ Created on Mon May  6 11:07:56 2019
 """
 import pygame
 from os import path
+import json
 
+def load_assets(img_dir):
+    assets = {}
+    assets['player_img'] = 
+
+    return assets
 pygame.init()
 
 
-
-
-WIDTH = 480 # Largura da tela
-HEIGHT = 600 # Altura da tela
-FPS = 60 # Frames por segundo
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-# Define algumas variáveis com as cores básicas
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-BLUE = (0, 0, 255)
-YELLOW = (255, 255, 0)
+assets = load_assets()
 class Player (pygame.sprite.Sprite):
     
     def __init__(self):
         
         pygame.sprite.Sprite.__init__(self)
         
-        self.image = pygame.image.load(path.join(img_dir, "Temp_car_sprite.png")).convert()
+        self.image = assets['player_img']
         self.rect = self.image.get_rect()
         self.size = 15
         self.acc = 0
