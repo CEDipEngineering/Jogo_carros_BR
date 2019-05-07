@@ -9,7 +9,7 @@ from os import path
 
 pygame.init()
 
-img_dir = path.join(path.dirname(__file__), 'Assets')
+img_dir = path.join(path.dirname(__file__), 'img')
 
 WIDTH = 480 # Largura da tela
 HEIGHT = 600 # Altura da tela
