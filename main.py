@@ -21,7 +21,7 @@ WIDTH = consts['WIDTH']
 BLACK = consts['BLACK']
 RED = consts['RED']
 img_dir = path.join(path.dirname(__file__), 'Assets')
-img_dir = path.join(path.dirname(__file__),'img')
+img_dir = path.join(img_dir,'img')
 
 
 

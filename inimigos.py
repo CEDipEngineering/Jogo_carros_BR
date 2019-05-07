@@ -14,13 +14,13 @@ from consts import HEIGHT
 class Inimigo(pygame.sprite.Sprite):
     
     # Construtor da classe.
-    def __init__(self, img_path):
+    def __init__(self, img):
         
         # Class Constructor
         pygame.sprite.Sprite.__init__(self)
         
         # Loading background image
-        inim_img = img_path
+        inim_img = img
         
         # Scaling #precisa ver a escala do fundo
         self.image = pygame.transform.scale(inim_img, (50, 38))
@@ -39,19 +39,19 @@ class Inimigo(pygame.sprite.Sprite):
         # colision radius
         self.radius = int(self.rect.width * .85 / 2)
         
-    # update cars location
-    def update(self):
-        self.rect.x += self.speedx
-        self.rect.y += self.speedy
-        
-        # loading eneies again
-        if self.rect.top > HEIGHT + 10 or self.rect.left < -25 or self.rect.right > WIDTH + 20:
-            
-            self.rect.x = random.randrange(WIDTH - self.rect.width)
-            
-            self.rect.y = random.randrange(-100, -40)
-            
-            self.speedx = random.randrange(-3, 3)
-            
-            self.speedy = random.randrange(2, 9)
-            
+#    # update cars location
+#    def update(self):
+#        self.rect.x += self.speedx
+#        self.rect.y += self.speedy
+#        
+#        # loading eneies again
+#        if self.rect.top > HEIGHT + 10 or self.rect.left < -25 or self.rect.right > WIDTH + 20:
+#            
+#            self.rect.x = random.randrange(WIDTH - self.rect.width)
+#            
+#            self.rect.y = random.randrange(-100, -40)
+#            
+#            self.speedx = random.randrange(-3, 3)
+#            
+#            self.speedy = random.randrange(2, 9)
+#            
