@@ -7,6 +7,8 @@ Created on Mon May  6 22:00:55 2019
 
 import pygame
 import random
+from consts import WIDTH
+from consts import HEIGHT
 
 
 class Inimigo(pygame.sprite.Sprite):
