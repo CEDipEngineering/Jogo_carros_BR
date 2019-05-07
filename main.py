@@ -30,6 +30,8 @@ img_dir = path.join(img_dir,'img')
 def load_assets(img_dir):
     assets = {}
     assets['player_img'] = pygame.image.load(path.join(img_dir, 'Red1.png')).convert()
+    assets['player_img'] = pygame.transform.rotate(assets['player_img'], -90)
+    assets['player_img'] = pygame.transform.scale(assets['player_img'], (25,25))
     assets['bullet_img'] = pygame.image.load(path.join(img_dir, 'Temp_car_sprite.png')).convert()
     return assets
 
