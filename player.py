@@ -44,10 +44,13 @@ class Player (pygame.sprite.Sprite):
     def update(self):
         # Physics
         
-        if self.speed <= self.SpeedLimit:
+        if abs(self.speed) <= self.SpeedLimit:
             self.speed += self.acc
         else:
-            self.speed = self.SpeedLimit
+            if self.speed > 0:
+                self.speed = self.SpeedLimit
+            else:
+                self.speed = -self.SpeedLimit
         
         self.xpos += self.speed
         
