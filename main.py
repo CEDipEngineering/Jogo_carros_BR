@@ -33,6 +33,7 @@ def load_assets(img_dir):
     assets['player_img'] = pygame.transform.rotate(assets['player_img'], -90)
     assets['player_img'] = pygame.transform.scale(assets['player_img'], (25,25))
     assets['bullet_img'] = pygame.image.load(path.join(img_dir, 'Temp_car_sprite.png')).convert()
+    assets['mob_img'] = pygame.image.load(path.join(img_dir, "Temp_car_sprite.png")).convert()
     return assets
 
 
@@ -104,10 +105,10 @@ clock = pygame.time.Clock()
 
 all_sprites = pygame.sprite.Group()            
 inimigos = pygame.sprite.Group()
-
+#b = Bullet(assets['bullet_img'])
 
 for i in range(10):
-    a = Inimigo(pygame.image.load(path.join(img_dir, "Temp_car_sprite.png")).convert())
+    a = Inimigo(assets['mob_img'])
     all_sprites.add(a)
     inimigos.add(a)
     
@@ -138,8 +139,11 @@ def Main():
                     if event.key == pygame.K_RIGHT:
                         player.acc += player.power
                     if event.key == pygame.K_SPACE:
-                        b = Bullet(assets['bullet_img'], player.rect.centerx, player.rect.bottom, player.speed)
-                        all_sprites.add(b)
+                        bullet = Bullet(assets['bullet_img'], player.rect.centerx, player.rect.bottom, player.speed)
+                        all_sprites.add(bullet)
+                    if event.key == pygame.K_ESCAPE:
+                        pygame.quit()
+                         
     
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_LEFT:
