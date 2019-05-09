@@ -14,6 +14,10 @@ pygame.init()
 with open('consts.txt', 'r') as consts_txt:
     conteudo = consts_txt.read()
     consts = json.loads(conteudo)
+    
+with open('dic_tanque.txt', 'r') as dic_tanque_txt:
+    conteudo = dic_tanque_txt.read()
+    tanque = json.loads(conteudo)
 
 FPS = consts['FPS']
 HEIGHT = consts['HEIGHT']
@@ -55,6 +59,12 @@ class Player (pygame.sprite.Sprite):
         self.xpos = WIDTH / 2
         self.rect.centerx = self.xpos
         self.rect.bottom = HEIGHT - self.size
+        
+        #Criando atributos de tanque de gasolina 
+        
+        espaco_tanque = 0
+        gasolina = [0, 10, 20, 30, 40, 50, 60, 70, 80, 100]
+        
 
         
     def update(self):
@@ -86,14 +96,30 @@ class Player (pygame.sprite.Sprite):
             self.speed = 0
             self.acc = 0
         
-        # Friction -- BETA
+        #código de implementação do tanque de gasolina 
+        
+        for i in range(gasolina):
+            self.espaco_tanque = gasolina[i]
+
+#        if self.espaco_tanque <= 40:
+#            tanque['Rio Grande de Sul].load
+#        elif sel.espaco_tanque 
+#            necessário idear condições melhores
+       
+            
+            
+            
+            
+            
+            
+            # Friction -- BETA
 #        if self.acc>0:
 #            self.acc-=0.9
 #        elif self.acc<0:
 #            self.acc+=0.9
 #        else:
 #            self.acc = 0
-
+        
 
 from inimigos import Inimigo
 from bullet import Bullet       
