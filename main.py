@@ -36,7 +36,7 @@ def load_assets(img_dir):
     assets['player_img'] = pygame.image.load(path.join(img_dir, 'Red1.png')).convert()
     assets['player_img'] = pygame.transform.rotate(assets['player_img'], -90)
     assets['player_img'] = pygame.transform.scale(assets['player_img'], (25,25))
-    assets['bullet_img'] = pygame.image.load(path.join(img_dir, 'bullet_5.png')).convert()
+    assets['bullet_img'] = pygame.image.load(path.join(img_dir, 'bullet_4.png')).convert_alpha()
     assets['mob_img'] = pygame.image.load(path.join(img_dir, "Blue2.png")).convert()
     return assets
 
@@ -190,7 +190,7 @@ def Main():
                 all_sprites.add(bullet)
                 tiros.add(bullet)       
             if fired:
-                i+=1
+                i += 1
             if i >= player.firerate:
                 i = 0
                 fired = False
