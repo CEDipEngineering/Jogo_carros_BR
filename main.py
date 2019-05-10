@@ -151,6 +151,7 @@ def Main():
     background = pygame.image.load(path.join(img_dir, 'road.png')).convert()
     background = pygame.transform.scale(background, (WIDTH, HEIGHT))
     background_posY = 0
+    background_aceleration = 1
     
     try:
         running = True
@@ -202,12 +203,16 @@ def Main():
                         
             all_sprites.update()
             
+            background_aceleration += 0.2
             screen.fill(BLACK)
             relative_y = background_posY % background.get_rect().height
             screen.blit(background, (0,relative_y - background.get_rect().height))
             if relative_y < HEIGHT:
                 screen.blit(background, (0,relative_y))
-            background_posY += 5
+            if background_aceleration < 80:
+                background_posY += background_aceleration
+            else:
+                background_posY += 80
             
             all_sprites.draw(screen)
             
