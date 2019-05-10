@@ -34,7 +34,7 @@ class Inimigo(pygame.sprite.Sprite):
         # random x location
         self.rect.x = random.randrange(WIDTH - self.rect.width)
         # random y location
-        self.rect.y = random.randrange(-100, -40)
+        self.rect.y = random.randrange(0, HEIGHT/2)
         
         # colision radius
         self.radius = int(self.rect.width * .85 / 2)

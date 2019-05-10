@@ -37,7 +37,7 @@ def load_assets(img_dir):
     assets['player_img'] = pygame.transform.rotate(assets['player_img'], -90)
     assets['player_img'] = pygame.transform.scale(assets['player_img'], (25,25))
     assets['bullet_img'] = pygame.image.load(path.join(img_dir, 'Temp_car_sprite.png')).convert()
-    assets['mob_img'] = pygame.image.load(path.join(img_dir, "Temp_car_sprite.png")).convert()
+    assets['mob_img'] = pygame.image.load(path.join(img_dir, "Blue2.png")).convert()
     return assets
 
 
@@ -179,7 +179,7 @@ def Main():
                         
             all_sprites.update()
             
-            screen.fill((87,87,87))
+            screen.fill((0,0,0))
     #        screen.blit(background)
             
             all_sprites.draw(screen)
