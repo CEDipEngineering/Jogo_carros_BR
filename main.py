@@ -36,7 +36,7 @@ def load_assets(img_dir):
     assets['player_img'] = pygame.image.load(path.join(img_dir, 'Red1.png')).convert()
     assets['player_img'] = pygame.transform.rotate(assets['player_img'], -90)
     assets['player_img'] = pygame.transform.scale(assets['player_img'], (25,25))
-    assets['bullet_img'] = pygame.image.load(path.join(img_dir, 'Temp_car_sprite.png')).convert()
+    assets['bullet_img'] = pygame.image.load(path.join(img_dir, 'bullet_5.png')).convert()
     assets['mob_img'] = pygame.image.load(path.join(img_dir, "Blue2.png")).convert()
     return assets
 
@@ -145,7 +145,6 @@ all_sprites.add(player)
 
 
 def Main():
-    
     background = pygame.image.load(path.join(img_dir, 'road.png')).convert()
     background = pygame.transform.scale(background, (WIDTH, HEIGHT))
     background_posY = 0
@@ -169,20 +168,20 @@ def Main():
                         player.acc -= player.power
                     if event.key == pygame.K_RIGHT:
                         player.acc += player.power
-                    if event.key == pygame.K_SPACE:
-                        bullet = Bullet(assets['bullet_img'], player.rect.centerx, player.rect.bottom, player.speed)
-                        all_sprites.add(bullet)
-                        tiros.add(bullet)
                     if event.key == pygame.K_ESCAPE:
                         pygame.quit()
-                         
-    
+            
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_LEFT:
                         player.acc = 0
                     if event.key == pygame.K_RIGHT:
                         player.acc = 0
-        
+            keys = pygame.key.get_pressed()  #checking pressed keys        
+            if keys[pygame.K_SPACE]:
+                   bullet = Bullet(assets['bullet_img'], player.rect.centerx, player.rect.bottom, player.speed)
+                   all_sprites.add(bullet)
+                   tiros.add(bullet)       
+                   
             hits = pygame.sprite.groupcollide(inimigos, tiros, True, True)
             for hit in hits:
                 m = Inimigo(assets['mob_img']) 
