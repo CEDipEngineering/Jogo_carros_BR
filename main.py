@@ -145,6 +145,11 @@ all_sprites.add(player)
 
 
 def Main():
+    
+    background = pygame.image.load(path.join(img_dir, 'road.png')).convert()
+    background = pygame.transform.scale(background, (WIDTH, HEIGHT))
+    background_posY = 0
+    
     try:
         running = True
         while running:
@@ -186,8 +191,12 @@ def Main():
                         
             all_sprites.update()
             
-            screen.fill((0,0,0))
-    #        screen.blit(background)
+            screen.fill(BLACK)
+            relative_y = background_posY % background.get_rect().height
+            screen.blit(background, (0,relative_y - background.get_rect().height))
+            if relative_y < HEIGHT:
+                screen.blit(background, (0,relative_y))
+            background_posY += 5
             
             all_sprites.draw(screen)
             
