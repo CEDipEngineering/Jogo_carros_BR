@@ -40,9 +40,9 @@ class Inimigo(pygame.sprite.Sprite):
         self.radius = int(self.rect.width * .85 / 2)
         
 #    # update cars location
-#    def update(self):
-#        self.rect.x += self.speedx
-#        self.rect.y += self.speedy
+    def update(self):
+        self.rect.x += 0 
+        self.rect.y += 0
 #        
 #        # loading eneies again
 #        if self.rect.top > HEIGHT + 10 or self.rect.left < -25 or self.rect.right > WIDTH + 20:
