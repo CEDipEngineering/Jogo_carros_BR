@@ -1,5 +1,28 @@
-dic_tanque = {'Rio Grande do Sul': {'fase1': 30, 'fase2': 40}, 'Santa Catarina': 
-    {'fase1': 80}, 'Parana': {'fase1': 80}, 'Sao Paulo': {'fase1': 90, 'fase2': 100},
-    'Rio de Janeiro': {'fase1': 70}, 'Minas Gerais': {'fase1': 80, 'fase2': 100}, 
-    'Distro Federal': {'fase1': 100, 'fase2': 100, 'fase3': 100}}
-    
+{
+    "Distro Federal": {
+        "fase1": 100,
+        "fase2": 100,
+        "fase3": 100
+    },
+    "Minas Gerais": {
+        "fase1": 80,
+        "fase2": 100
+    },
+    "Parana": {
+        "fase1": 80
+    },
+    "Rio Grande do Sul": {
+        "fase1": 30,
+        "fase2": 40
+    },
+    "Rio de Janeiro": {
+        "fase1": 70
+    },
+    "Santa Catarina": {
+        "fase1": 80
+    },
+    "Sao Paulo": {
+        "fase1": 90,
+        "fase2": 100
+    }
+}

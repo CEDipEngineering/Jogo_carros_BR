@@ -62,8 +62,8 @@ class Player (pygame.sprite.Sprite):
         
         #Criando atributos de tanque de gasolina 
         
-        espaco_tanque = 0
-        gasolina = [0, 10, 20, 30, 40, 50, 60, 70, 80, 100]
+#        espaco_tanque = 0
+#        gasolina = [0, 10, 20, 30, 40, 50, 60, 70, 80, 100]
         
 
         
@@ -97,9 +97,9 @@ class Player (pygame.sprite.Sprite):
             self.acc = 0
         
         #código de implementação do tanque de gasolina 
-        
-        for i in range(gasolina):
-            self.espaco_tanque = gasolina[i]
+#        
+#        for i in range(gasolina):
+#            self.espaco_tanque = gasolina[i]
 
 #        if self.espaco_tanque <= 40:
 #            tanque['Rio Grande de Sul].load
