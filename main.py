@@ -203,16 +203,16 @@ def Main():
                         
             all_sprites.update()
             
-            background_aceleration += 0.2
+            background_aceleration += 0.05
             screen.fill(BLACK)
             relative_y = background_posY % background.get_rect().height
             screen.blit(background, (0,relative_y - background.get_rect().height))
             if relative_y < HEIGHT:
                 screen.blit(background, (0,relative_y))
-            if background_aceleration < 80:
+            if background_aceleration < 60:
                 background_posY += background_aceleration
             else:
-                background_posY += 80
+                background_posY += 60
             
             all_sprites.draw(screen)
             
