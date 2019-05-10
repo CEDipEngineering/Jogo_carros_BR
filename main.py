@@ -127,11 +127,10 @@ from bullet import Bullet
 
 player = Player()
 clock = pygame.time.Clock()
-#background = pygame.Rect(0,0,WIDTH,HEIGHT)
 
 all_sprites = pygame.sprite.Group()            
 inimigos = pygame.sprite.Group()
-#b = Bullet(assets['bullet_img'])
+tiros = pygame.sprite.Group()
 
 for i in range(10):
     a = Inimigo(assets['mob_img'])
@@ -167,6 +166,7 @@ def Main():
                     if event.key == pygame.K_SPACE:
                         bullet = Bullet(assets['bullet_img'], player.rect.centerx, player.rect.bottom, player.speed)
                         all_sprites.add(bullet)
+                        tiros.add(bullet)
                     if event.key == pygame.K_ESCAPE:
                         pygame.quit()
                          
@@ -176,6 +176,12 @@ def Main():
                         player.acc = 0
                     if event.key == pygame.K_RIGHT:
                         player.acc = 0
+        
+            hits = pygame.sprite.groupcollide(inimigos, tiros, True, True)
+            for hit in hits:
+                m = Inimigo(assets['mob_img']) 
+                all_sprites.add(m)
+                inimigos.add(m)
                         
             all_sprites.update()
             
