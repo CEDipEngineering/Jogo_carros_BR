@@ -60,6 +60,7 @@ class Player (pygame.sprite.Sprite):
         self.xpos = WIDTH / 2
         self.rect.centerx = self.xpos
         self.rect.bottom = HEIGHT - self.size
+        self.firerate = 10
         
         #Criando atributos de tanque de gasolina 
         
@@ -145,6 +146,8 @@ all_sprites.add(player)
 
 
 def Main():
+    fired = False
+    i = 0
     background = pygame.image.load(path.join(img_dir, 'road.png')).convert()
     background = pygame.transform.scale(background, (WIDTH, HEIGHT))
     background_posY = 0
@@ -170,18 +173,27 @@ def Main():
                         player.acc += player.power
                     if event.key == pygame.K_ESCAPE:
                         pygame.quit()
+#                    if event.key == pygame.K_UP:
+#                        player.firerate = 0.01
             
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_LEFT:
                         player.acc = 0
                     if event.key == pygame.K_RIGHT:
                         player.acc = 0
+#                    if event.key == pygame.K_UP:
+#                        player.firerate = 10
             keys = pygame.key.get_pressed()  #checking pressed keys        
-            if keys[pygame.K_SPACE]:
-                   bullet = Bullet(assets['bullet_img'], player.rect.centerx, player.rect.bottom, player.speed)
-                   all_sprites.add(bullet)
-                   tiros.add(bullet)       
-                   
+            if keys[pygame.K_SPACE] and not fired:
+                fired = True
+                bullet = Bullet(assets['bullet_img'], player.rect.centerx, player.rect.bottom, player.speed)
+                all_sprites.add(bullet)
+                tiros.add(bullet)       
+            if fired:
+                i+=1
+            if i >= player.firerate:
+                i = 0
+                fired = False
             hits = pygame.sprite.groupcollide(inimigos, tiros, True, True)
             for hit in hits:
                 m = Inimigo(assets['mob_img']) 
