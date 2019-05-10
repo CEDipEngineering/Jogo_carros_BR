@@ -51,6 +51,7 @@ class Player (pygame.sprite.Sprite):
         
         self.image = assets['player_img']
         self.rect = self.image.get_rect()
+        self.image.set_colorkey((0,0,0))
         self.size = 15
         self.acc = 0
         self.speed = 0

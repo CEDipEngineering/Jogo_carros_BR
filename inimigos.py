@@ -15,28 +15,14 @@ class Inimigo(pygame.sprite.Sprite):
     
     # Construtor da classe.
     def __init__(self, img):
-        
-        # Class Constructor
         pygame.sprite.Sprite.__init__(self)
-        
-        # Loading background image
+ 
         inim_img = img
-        
-        # Scaling #precisa ver a escala do fundo
         self.image = pygame.transform.scale(inim_img, (50, 38))
-        
-        # no Back
         self.image.set_colorkey((0,0,0))
-        
-        # Positionig details
         self.rect = self.image.get_rect()
-        
-        # random x location
         self.rect.x = random.randrange(WIDTH - self.rect.width)
-        # random y location
         self.rect.y = random.randrange(0, HEIGHT/2)
-        
-        # colision radius
         self.radius = int(self.rect.width * .85 / 2)
         
 #    # update cars location

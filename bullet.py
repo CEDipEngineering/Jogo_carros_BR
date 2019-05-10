@@ -32,9 +32,6 @@ class Bullet(pygame.sprite.Sprite):
         self.yspeed = -10
         self.xpos = playerx
         self.ypos = playery
-#        self.
-#        self.
-#        self.
         self.rect = self.image.get_rect()
         self.rect.centerx = self.xpos
         self.rect.bottom = self.ypos
