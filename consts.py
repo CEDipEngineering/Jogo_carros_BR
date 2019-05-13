@@ -7,7 +7,7 @@ Created on Tue May  7 16:01:00 2019
 
 import json 
 
-WIDTH = 640
+WIDTH = 480
 HEIGHT = 720
 FPS = 60 
 WHITE = (255, 255, 255)

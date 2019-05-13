@@ -34,15 +34,23 @@ img_dir = path.join(img_dir,'img')
 def load_assets(img_dir):
     assets = {}
     assets['player_img'] = pygame.image.load(path.join(img_dir, 'Red1.png')).convert()
-    assets['player_img'] = pygame.transform.rotate(assets['player_img'], -90)
-    assets['player_img'] = pygame.transform.scale(assets['player_img'], (25,25))
-    assets['bullet_img'] = pygame.image.load(path.join(img_dir, 'bullet_4.png')).convert_alpha()
+    assets['bullet_img'] = pygame.image.load(path.join(img_dir, 'bullet_3.png')).convert_alpha()
     assets['mob_img'] = pygame.image.load(path.join(img_dir, "Blue2.png")).convert()
+    
     return assets
 
+def Transform_Imgs(assets):
+    assets['player_img'] = pygame.transform.rotate(assets['player_img'], -90)
+    assets['player_img'] = pygame.transform.scale(assets['player_img'], (53,60))
+    assets['mob_img'] = pygame.transform.scale(assets['mob_img'], (100,20))
+    
+    return assets
+    
+    
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 assets = load_assets(img_dir)
+assets = Transform_Imgs(assets)
 class Player (pygame.sprite.Sprite):
     
     def __init__(self):
@@ -60,7 +68,8 @@ class Player (pygame.sprite.Sprite):
         self.xpos = WIDTH / 2
         self.rect.centerx = self.xpos
         self.rect.bottom = HEIGHT - self.size
-        self.firerate = 10
+        self.firerate = 20
+        self.burstfire = 0
         
         #Criando atributos de tanque de gasolina 
         
@@ -146,8 +155,11 @@ all_sprites.add(player)
 
 
 def Main():
+    #Variáveis
     fired = False
-    i = 0
+    fired_cooldown = 0
+    Shots_Fired = 0
+    
     background = pygame.image.load(path.join(img_dir, 'road.png')).convert()
     background = pygame.transform.scale(background, (WIDTH, HEIGHT))
     background_posY = 0
@@ -174,26 +186,31 @@ def Main():
                         player.acc += player.power
                     if event.key == pygame.K_ESCAPE:
                         pygame.quit()
-#                    if event.key == pygame.K_UP:
-#                        player.firerate = 0.01
+                    if event.key == pygame.K_UP:
+                        player.firerate = 0.01
             
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_LEFT:
                         player.acc = 0
                     if event.key == pygame.K_RIGHT:
                         player.acc = 0
-#                    if event.key == pygame.K_UP:
-#                        player.firerate = 10
+                    if event.key == pygame.K_UP:
+                        player.firerate = 10
             keys = pygame.key.get_pressed()  #checking pressed keys        
             if keys[pygame.K_SPACE] and not fired:
-                fired = True
-                bullet = Bullet(assets['bullet_img'], player.rect.centerx, player.rect.bottom, player.speed)
-                all_sprites.add(bullet)
-                tiros.add(bullet)       
+                if Shots_Fired<=player.burstfire:
+                    bullet = Bullet(assets['bullet_img'], player.rect.centerx, player.rect.bottom, player.speed)
+                    all_sprites.add(bullet)
+                    tiros.add(bullet)
+                    Shots_Fired += 1
+                else:
+                    Shots_Fired = 0
+                    fired = True
+                
             if fired:
-                i += 1
-            if i >= player.firerate:
-                i = 0
+                fired_cooldown += 1
+            if fired_cooldown >= player.firerate:
+                fired_cooldown = 0
                 fired = False
             hits = pygame.sprite.groupcollide(inimigos, tiros, True, True)
             for hit in hits:
@@ -203,7 +220,7 @@ def Main():
                         
             all_sprites.update()
             
-            background_aceleration += 0.05
+            background_aceleration += 0.02
             screen.fill(BLACK)
             relative_y = background_posY % background.get_rect().height
             screen.blit(background, (0,relative_y - background.get_rect().height))
