@@ -1,0 +1,104 @@
+
+=================== FREESOUND ATTRIBUTION FORM =======================
+
+This form below lists all the samples in this pack with their descriptions and tags.
+You can use this form to attribute samples to users when you use them.
+
+=========================== CUT HERE =================================
+
+File:
+	Name: "01_ProgressiveSID_C1.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=2887
+	Date of upload: 2005-06-25 15:22:50
+	
+Designer / Creator / Uploader:
+	Name: "ao_ks"
+	Url: http://www.freesound.org/usersViewSingle.php?id=6307
+	
+Description:
+	By "ao_ks" : This is a C64 type lead recorded from an Elektron SID Station and is extracted from TranSID free reason refill series made by Kreativ Sounds (www.kreativsounds.com)
+
+Tags:
+	lead sid 
+======================================================================
+
+File:
+	Name: "02_ProgressiveSID_C2.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=2888
+	Date of upload: 2005-06-25 15:23:14
+	
+Designer / Creator / Uploader:
+	Name: "ao_ks"
+	Url: http://www.freesound.org/usersViewSingle.php?id=6307
+	
+Description:
+	By "ao_ks" : This is a C64 type lead recorded from an Elektron SID Station and is extracted from TranSID free reason refill series made by Kreativ Sounds (www.kreativsounds.com)
+
+Tags:
+	lead sid 
+======================================================================
+
+File:
+	Name: "03_ProgressiveSID_C3.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=2889
+	Date of upload: 2005-06-25 15:23:34
+	
+Designer / Creator / Uploader:
+	Name: "ao_ks"
+	Url: http://www.freesound.org/usersViewSingle.php?id=6307
+	
+Description:
+	By "ao_ks" : This is a C64 type lead recorded from an Elektron SID Station and is extracted from TranSID free reason refill series made by Kreativ Sounds (www.kreativsounds.com)
+
+Tags:
+	lead sid 
+======================================================================
+
+File:
+	Name: "04_ProgressiveSID_C4.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=2890
+	Date of upload: 2005-06-25 15:23:45
+	
+Designer / Creator / Uploader:
+	Name: "ao_ks"
+	Url: http://www.freesound.org/usersViewSingle.php?id=6307
+	
+Description:
+	By "ao_ks" : This is a C64 type lead recorded from an Elektron SID Station and is extracted from TranSID free reason refill series made by Kreativ Sounds (www.kreativsounds.com)
+
+Tags:
+	lead sid 
+======================================================================
+
+File:
+	Name: "05_ProgressiveSID_C5.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=2891
+	Date of upload: 2005-06-25 15:24:54
+	
+Designer / Creator / Uploader:
+	Name: "ao_ks"
+	Url: http://www.freesound.org/usersViewSingle.php?id=6307
+	
+Description:
+	By "ao_ks" : This is a C64 type lead recorded from an Elektron SID Station and is extracted from TranSID free reason refill series made by Kreativ Sounds (www.kreativsounds.com)
+
+Tags:
+	lead sid 
+======================================================================
+
+File:
+	Name: "06_ProgressiveSID_C6.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=2892
+	Date of upload: 2005-06-25 15:25:05
+	
+Designer / Creator / Uploader:
+	Name: "ao_ks"
+	Url: http://www.freesound.org/usersViewSingle.php?id=6307
+	
+Description:
+	By "ao_ks" : This is a C64 type lead recorded from an Elektron SID Station and is extracted from TranSID free reason refill series made by Kreativ Sounds (www.kreativsounds.com)
+
+Tags:
+	lead sid 
+======================================================================
+
