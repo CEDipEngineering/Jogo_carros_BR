@@ -1,0 +1,248 @@
+
+=================== FREESOUND ATTRIBUTION FORM =======================
+
+This form below lists all the samples in this pack with their descriptions and tags.
+You can use this form to attribute samples to users when you use them.
+
+=========================== CUT HERE =================================
+
+File:
+	Name: "EBow_Guitar_A#5_RS.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=43460
+	Date of upload: 2007-11-02 12:51:51
+	
+Designer / Creator / Uploader:
+	Name: "symfonysid"
+	Url: http://www.freesound.org/usersViewSingle.php?id=4738
+	
+Description:
+	By "symfonysid" : Sample of a PRS Tremonti guitar being played with an Ebow. An Ebow is a magnetic device that causes a steel string to vibrate by creating two magnetic poles on either side of the string.
+
+Tags:
+	5 a ambient drone ebow-guitar melodic multisample 
+======================================================================
+
+File:
+	Name: "EBow_Guitar_A4_RS.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=43461
+	Date of upload: 2007-11-02 13:15:42
+	
+Designer / Creator / Uploader:
+	Name: "symfonysid"
+	Url: http://www.freesound.org/usersViewSingle.php?id=4738
+	
+Description:
+	By "symfonysid" : Sample of a PRS Tremonti guitar being played with an Ebow. An Ebow is a magnetic device that causes a steel string to vibrate by creating two magnetic poles on either side of the string.
+
+Tags:
+	a4 ambient drone ebow-guitar melodic multisample 
+======================================================================
+
+File:
+	Name: "EBow_Guitar_A5_RS.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=43462
+	Date of upload: 2007-11-02 13:15:48
+	
+Designer / Creator / Uploader:
+	Name: "symfonysid"
+	Url: http://www.freesound.org/usersViewSingle.php?id=4738
+	
+Description:
+	By "symfonysid" : Sample of a PRS Tremonti guitar being played with an Ebow. An Ebow is a magnetic device that causes a steel string to vibrate by creating two magnetic poles on either side of the string.
+
+Tags:
+	a5 ambient drone ebow-guitar melodic multisample 
+======================================================================
+
+File:
+	Name: "EBow_Guitar_B4_RS.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=43463
+	Date of upload: 2007-11-02 13:15:50
+	
+Designer / Creator / Uploader:
+	Name: "symfonysid"
+	Url: http://www.freesound.org/usersViewSingle.php?id=4738
+	
+Description:
+	By "symfonysid" : Sample of a PRS Tremonti guitar being played with an Ebow. An Ebow is a magnetic device that causes a steel string to vibrate by creating two magnetic poles on either side of the string.
+
+Tags:
+	ambient b4 drone ebow-guitar melodic multisample 
+======================================================================
+
+File:
+	Name: "EBow_Guitar_B5_RS.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=43464
+	Date of upload: 2007-11-02 13:15:52
+	
+Designer / Creator / Uploader:
+	Name: "symfonysid"
+	Url: http://www.freesound.org/usersViewSingle.php?id=4738
+	
+Description:
+	By "symfonysid" : Sample of a PRS Tremonti guitar being played with an Ebow. An Ebow is a magnetic device that causes a steel string to vibrate by creating two magnetic poles on either side of the string.
+
+Tags:
+	ambient b5 drone ebow-guitar melodic multisample 
+======================================================================
+
+File:
+	Name: "EBow_Guitar_C#4_RS.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=43465
+	Date of upload: 2007-11-02 13:15:57
+	
+Designer / Creator / Uploader:
+	Name: "symfonysid"
+	Url: http://www.freesound.org/usersViewSingle.php?id=4738
+	
+Description:
+	By "symfonysid" : Sample of a PRS Tremonti guitar being played with an Ebow. An Ebow is a magnetic device that causes a steel string to vibrate by creating two magnetic poles on either side of the string.
+
+Tags:
+	4 ambient c drone ebow-guitar melodic multisample 
+======================================================================
+
+File:
+	Name: "EBow_Guitar_C4_RS.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=43466
+	Date of upload: 2007-11-02 13:16:00
+	
+Designer / Creator / Uploader:
+	Name: "symfonysid"
+	Url: http://www.freesound.org/usersViewSingle.php?id=4738
+	
+Description:
+	By "symfonysid" : Sample of a PRS Tremonti guitar being played with an Ebow. An Ebow is a magnetic device that causes a steel string to vibrate by creating two magnetic poles on either side of the string.
+
+Tags:
+	ambient c4 drone ebow-guitar melodic multisample 
+======================================================================
+
+File:
+	Name: "EBow_Guitar_C5_RS.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=43467
+	Date of upload: 2007-11-02 13:16:01
+	
+Designer / Creator / Uploader:
+	Name: "symfonysid"
+	Url: http://www.freesound.org/usersViewSingle.php?id=4738
+	
+Description:
+	By "symfonysid" : Sample of a PRS Tremonti guitar being played with an Ebow. An Ebow is a magnetic device that causes a steel string to vibrate by creating two magnetic poles on either side of the string.
+
+Tags:
+	ambient c5 drone ebow-guitar melodic multisample 
+======================================================================
+
+File:
+	Name: "EBow_Guitar_D#4_RS.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=43468
+	Date of upload: 2007-11-02 13:16:03
+	
+Designer / Creator / Uploader:
+	Name: "symfonysid"
+	Url: http://www.freesound.org/usersViewSingle.php?id=4738
+	
+Description:
+	By "symfonysid" : Sample of a PRS Tremonti guitar being played with an Ebow. An Ebow is a magnetic device that causes a steel string to vibrate by creating two magnetic poles on either side of the string.
+
+Tags:
+	4 ambient d drone ebow-guitar melodic multisample 
+======================================================================
+
+File:
+	Name: "EBow_Guitar_D4_RS.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=43469
+	Date of upload: 2007-11-02 13:16:05
+	
+Designer / Creator / Uploader:
+	Name: "symfonysid"
+	Url: http://www.freesound.org/usersViewSingle.php?id=4738
+	
+Description:
+	By "symfonysid" : Sample of a PRS Tremonti guitar being played with an Ebow. An Ebow is a magnetic device that causes a steel string to vibrate by creating two magnetic poles on either side of the string.
+
+Tags:
+	ambient d4 drone ebow-guitar melodic multisample 
+======================================================================
+
+File:
+	Name: "EBow_Guitar_E4_RS.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=43470
+	Date of upload: 2007-11-02 13:16:06
+	
+Designer / Creator / Uploader:
+	Name: "symfonysid"
+	Url: http://www.freesound.org/usersViewSingle.php?id=4738
+	
+Description:
+	By "symfonysid" : Sample of a PRS Tremonti guitar being played with an Ebow. An Ebow is a magnetic device that causes a steel string to vibrate by creating two magnetic poles on either side of the string.
+
+Tags:
+	ambient drone e4 ebow-guitar melodic multisample 
+======================================================================
+
+File:
+	Name: "EBow_Guitar_F#4_RS.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=43471
+	Date of upload: 2007-11-02 13:16:07
+	
+Designer / Creator / Uploader:
+	Name: "symfonysid"
+	Url: http://www.freesound.org/usersViewSingle.php?id=4738
+	
+Description:
+	By "symfonysid" : Sample of a PRS Tremonti guitar being played with an Ebow. An Ebow is a magnetic device that causes a steel string to vibrate by creating two magnetic poles on either side of the string.
+
+Tags:
+	4 ambient drone ebow-guitar f melodic multisample 
+======================================================================
+
+File:
+	Name: "EBow_Guitar_F4_RS.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=43472
+	Date of upload: 2007-11-02 13:16:08
+	
+Designer / Creator / Uploader:
+	Name: "symfonysid"
+	Url: http://www.freesound.org/usersViewSingle.php?id=4738
+	
+Description:
+	By "symfonysid" : Sample of a PRS Tremonti guitar being played with an Ebow. An Ebow is a magnetic device that causes a steel string to vibrate by creating two magnetic poles on either side of the string.
+
+Tags:
+	ambient drone ebow-guitar f4 melodic multisample 
+======================================================================
+
+File:
+	Name: "EBow_Guitar_G#4_RS.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=43473
+	Date of upload: 2007-11-02 13:16:10
+	
+Designer / Creator / Uploader:
+	Name: "symfonysid"
+	Url: http://www.freesound.org/usersViewSingle.php?id=4738
+	
+Description:
+	By "symfonysid" : Sample of a PRS Tremonti guitar being played with an Ebow. An Ebow is a magnetic device that causes a steel string to vibrate by creating two magnetic poles on either side of the string.
+
+Tags:
+	4 ambient drone ebow-guitar g melodic multisample 
+======================================================================
+
+File:
+	Name: "EBow_Guitar_G4_RS.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=43474
+	Date of upload: 2007-11-02 13:16:12
+	
+Designer / Creator / Uploader:
+	Name: "symfonysid"
+	Url: http://www.freesound.org/usersViewSingle.php?id=4738
+	
+Description:
+	By "symfonysid" : Sample of a PRS Tremonti guitar being played with an Ebow. An Ebow is a magnetic device that causes a steel string to vibrate by creating two magnetic poles on either side of the string.
+
+Tags:
+	ambient drone ebow-guitar g4 melodic multisample 
+======================================================================
+

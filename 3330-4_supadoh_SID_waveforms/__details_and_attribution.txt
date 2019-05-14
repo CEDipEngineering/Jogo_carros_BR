@@ -1,0 +1,80 @@
+
+=================== FREESOUND ATTRIBUTION FORM =======================
+
+This form below lists all the samples in this pack with their descriptions and tags.
+You can use this form to attribute samples to users when you use them.
+
+=========================== CUT HERE =================================
+
+File:
+	Name: "SID-Pulse1-C.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=51617
+	Date of upload: 2008-04-10 08:52:53
+	
+Designer / Creator / Uploader:
+	Name: "supadoh"
+	Url: http://www.freesound.org/usersViewSingle.php?id=610202
+	
+Description:
+	By "supadoh" : One cycle pulse wave from a SID.
+
+Sampled from a commodore 64 model II- rev5 8580 SID chip running prophet 64 software.
+
+Tags:
+	basic-waveform c64 pulsewave raw sid synth waveform 
+======================================================================
+
+File:
+	Name: "SID-Pulse2-C.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=51618
+	Date of upload: 2008-04-10 08:52:57
+	
+Designer / Creator / Uploader:
+	Name: "supadoh"
+	Url: http://www.freesound.org/usersViewSingle.php?id=610202
+	
+Description:
+	By "supadoh" : One cycle pulse wave from a SID.
+
+Sampled from a commodore 64 model II- rev5 8580 SID chip running prophet 64 software.
+
+Tags:
+	basic-waveform c64 pulsewave raw sid synth waveform 
+======================================================================
+
+File:
+	Name: "SID-Saw-C.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=51619
+	Date of upload: 2008-04-10 08:52:59
+	
+Designer / Creator / Uploader:
+	Name: "supadoh"
+	Url: http://www.freesound.org/usersViewSingle.php?id=610202
+	
+Description:
+	By "supadoh" : One cycle sawtooth wave from a SID.
+
+Sampled from a commodore 64 model II- rev5 8580 SID chip running prophet 64 software.
+
+Tags:
+	basic-waveform c64 raw sawtooth sid synth waveform 
+======================================================================
+
+File:
+	Name: "SID-Triangle-C.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=51620
+	Date of upload: 2008-04-10 08:53:08
+	
+Designer / Creator / Uploader:
+	Name: "supadoh"
+	Url: http://www.freesound.org/usersViewSingle.php?id=610202
+	
+Description:
+	By "supadoh" : One cycle triangle wave from a SID.
+
+Sampled from a commodore 64 model II- rev5 8580 SID chip running prophet 64 software.
+
+Tags:
+	basic-waveform c64 raw sid synth triangle waveform 
+======================================================================
+
