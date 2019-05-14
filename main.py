@@ -36,6 +36,7 @@ def load_assets(img_dir):
     assets['player_img'] = pygame.image.load(path.join(img_dir, 'Red1.png')).convert()
     assets['bullet_img'] = pygame.image.load(path.join(img_dir, 'bullet_3.png')).convert_alpha()
     assets['mob_img'] = pygame.image.load(path.join(img_dir, "Blue2.png")).convert()
+    assets['background'] = pygame.image.load(path.join(img_dir, 'road.png')).convert()
     
     return assets
 
@@ -160,7 +161,7 @@ def Main():
     fired_cooldown = 0
     Shots_Fired = 0
     
-    background = pygame.image.load(path.join(img_dir, 'road.png')).convert()
+    background = assets['background']
     background = pygame.transform.scale(background, (WIDTH, HEIGHT))
     background_posY = 0
     background_aceleration = 1
@@ -169,6 +170,7 @@ def Main():
         running = True
         while running:
             
+            keys = pygame.key.get_pressed()  #checking pressed keys
             # Ajusta a velocidade do jogo.
             clock.tick(FPS)
             
@@ -180,9 +182,9 @@ def Main():
                     running = False
                 
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_LEFT:
+                    if event.key == pygame.K_LEFT or keys[pygame.K_LEFT]:
                         player.acc -= player.power
-                    if event.key == pygame.K_RIGHT:
+                    if event.key == pygame.K_RIGHT or keys[pygame.K_RIGHT]:
                         player.acc += player.power
                     if event.key == pygame.K_ESCAPE:
                         pygame.quit()
@@ -196,7 +198,6 @@ def Main():
                         player.acc = 0
                     if event.key == pygame.K_UP:
                         player.firerate = 10
-            keys = pygame.key.get_pressed()  #checking pressed keys        
             if keys[pygame.K_SPACE] and not fired:
                 if Shots_Fired<=player.burstfire:
                     bullet = Bullet(assets['bullet_img'], player.rect.centerx, player.rect.bottom, player.speed)
