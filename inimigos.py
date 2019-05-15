@@ -16,19 +16,20 @@ class Inimigo(pygame.sprite.Sprite):
     # Construtor da classe.
     def __init__(self, img):
         pygame.sprite.Sprite.__init__(self)
- 
-        inim_img = img
-        self.image = pygame.transform.scale(inim_img, (50, 38))
+        
+        self.image = img
         self.image.set_colorkey((0,0,0))
         self.rect = self.image.get_rect()
         self.rect.x = random.randrange(WIDTH - self.rect.width)
-        self.rect.y = random.randrange(0, HEIGHT/2)
+        self.rect.y = random.randrange(-100,-50)
         self.radius = int(self.rect.width * .85 / 2)
-        
-#    # update cars location
+        self.speedy = 0
     def update(self):
-        self.rect.x += 0 
-        self.rect.y += 0
+        self.rect.top += self.speedy
+    
+    def updateSpeed(self, speedy):
+        self.speedy = speedy
+        
 #        
 #        # loading eneies again
 #        if self.rect.top > HEIGHT + 10 or self.rect.left < -25 or self.rect.right > WIDTH + 20:

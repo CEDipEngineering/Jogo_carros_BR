@@ -7,6 +7,7 @@ Created on Mon May  6 11:07:56 2019
 import pygame
 from os import path
 import json
+import random
 
 
 pygame.init()
@@ -43,7 +44,7 @@ def load_assets(img_dir):
 def Transform_Imgs(assets):
     assets['player_img'] = pygame.transform.rotate(assets['player_img'], -90)
     assets['player_img'] = pygame.transform.scale(assets['player_img'], (53,60))
-    assets['mob_img'] = pygame.transform.scale(assets['mob_img'], (100,20))
+    assets['mob_img'] = pygame.transform.scale(assets['mob_img'], (32,45))
     
     return assets
     
@@ -144,7 +145,7 @@ all_sprites = pygame.sprite.Group()
 inimigos = pygame.sprite.Group()
 tiros = pygame.sprite.Group()
 
-for i in range(10):
+for i in range(5):
     a = Inimigo(assets['mob_img'])
     all_sprites.add(a)
     inimigos.add(a)
@@ -163,8 +164,13 @@ def Main():
     
     background = assets['background']
     background = pygame.transform.scale(background, (WIDTH, HEIGHT))
+#    background2 = pygame.transform.scale(background, (WIDTH, HEIGHT))
     background_posY = 0
-    background_aceleration = 1
+    background_aceleration = 10 
+    background_maxspeed = 7.5
+#    background.get_rect().y = 0
+#    background2.get_rect().y = -HEIGHT
+
     
     try:
         running = True
@@ -219,18 +225,33 @@ def Main():
                 all_sprites.add(m)
                 inimigos.add(m)
                         
-            all_sprites.update()
             
-            background_aceleration += 0.02
+            
+
             screen.fill(BLACK)
+            
+            
+            
+            for car in inimigos:
+                car.updateSpeed(background_aceleration)
+                if car.rect.y >=HEIGHT:
+                    car.rect.x = random.randrange(WIDTH - car.rect.width)
+                    car.rect.y = random.randrange(-100, -50)
+            all_sprites.update()        
+            
+            ##----Background movement----##
+            if background_aceleration >= background_maxspeed:
+                background_aceleration = background_maxspeed
+            else:
+                background_aceleration += 0           
             relative_y = background_posY % background.get_rect().height
             screen.blit(background, (0,relative_y - background.get_rect().height))
             if relative_y < HEIGHT:
                 screen.blit(background, (0,relative_y))
-            if background_aceleration < 60:
-                background_posY += background_aceleration
-            else:
-                background_posY += 60
+            background_posY += background_aceleration
+            ##---------------------------##
+            
+            
             
             all_sprites.draw(screen)
             
