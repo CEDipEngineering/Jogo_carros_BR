@@ -27,14 +27,14 @@ BLACK = consts['BLACK']
 RED = consts['RED']
 img_dir = path.join(path.dirname(__file__), 'Assets')
 img_dir = path.join(img_dir,'img')
-
+std_width = int(WIDTH/10)
 
 
 
 
 def load_assets(img_dir):
     assets = {}
-    assets['player_img'] = pygame.image.load(path.join(img_dir, 'Red1.png')).convert()
+    assets['player_img'] = pygame.image.load(path.join(img_dir, 'Cyan1.png')).convert_alpha()
     assets['bullet_img'] = pygame.image.load(path.join(img_dir, 'bullet_3.png')).convert_alpha()
     assets['mob_img'] = pygame.image.load(path.join(img_dir, "Blue2.png")).convert()
     assets['background'] = pygame.image.load(path.join(img_dir, 'road.png')).convert()
@@ -43,8 +43,8 @@ def load_assets(img_dir):
 
 def Transform_Imgs(assets):
     assets['player_img'] = pygame.transform.rotate(assets['player_img'], -90)
-    assets['player_img'] = pygame.transform.scale(assets['player_img'], (53,60))
-    assets['mob_img'] = pygame.transform.scale(assets['mob_img'], (32,45))
+    assets['player_img'] = pygame.transform.scale(assets['player_img'], (std_width,95))
+    assets['mob_img'] = pygame.transform.scale(assets['mob_img'], (std_width,95))
     
     return assets
     
@@ -206,7 +206,7 @@ def Main():
                         player.firerate = 10
             if keys[pygame.K_SPACE] and not fired:
                 if Shots_Fired<=player.burstfire:
-                    bullet = Bullet(assets['bullet_img'], player.rect.centerx, player.rect.bottom, player.speed)
+                    bullet = Bullet(assets['bullet_img'], player.rect.centerx, player.rect.top, player.speed)
                     all_sprites.add(bullet)
                     tiros.add(bullet)
                     Shots_Fired += 1

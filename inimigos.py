@@ -25,10 +25,11 @@ class Inimigo(pygame.sprite.Sprite):
         self.radius = int(self.rect.width * .85 / 2)
         self.speedy = 0
     def update(self):
-        self.rect.top += self.speedy
+#        self.rect.top += self.speedy
+        pass
     
     def updateSpeed(self, speedy):
-        self.speedy = speedy
+        self.rect.top += speedy
         
 #        
 #        # loading eneies again
