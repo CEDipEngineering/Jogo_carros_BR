@@ -42,7 +42,7 @@ def load_assets(img_dir):
     return assets
 
 def Transform_Imgs(assets):
-    assets['player_img'] = pygame.transform.rotate(assets['player_img'], -90)
+    assets['player_img'] = pygame.transform.rotate(assets['player_img'], +90)
     assets['player_img'] = pygame.transform.scale(assets['player_img'], (std_width,95))
     assets['mob_img'] = pygame.transform.scale(assets['mob_img'], (std_width,95))
     
