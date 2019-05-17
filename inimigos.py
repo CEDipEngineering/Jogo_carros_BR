@@ -24,6 +24,7 @@ class Inimigo(pygame.sprite.Sprite):
         self.speedy = 0
         self.BOSS = False
         self.rect.centerx = col * WIDTH/5
+        self.rect.top = random.randint(-100,-50)
     def update(self):
 #        self.rect.top += self.speedy
         pass
@@ -31,9 +32,6 @@ class Inimigo(pygame.sprite.Sprite):
     def updateSpeed(self, speedy):
         self.rect.top += speedy
     
-    def spawn(self):
-        if random(100)>=50:
-            self.rect.top = random(-50,-100)
             
         
         

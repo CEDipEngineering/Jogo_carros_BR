@@ -126,7 +126,7 @@ class Player (pygame.sprite.Sprite):
         self.accY = 0
         self.speed = 0
         self.speedY = 0
-        self.power = 0.15
+        self.power = 0.5
         self.SpeedLimit = 4
         self.xpos = WIDTH / 2
         self.rect.centerx = self.xpos
@@ -278,9 +278,9 @@ def Main():
                     if event.key == pygame.K_RIGHT:
                         r_down = True
                         player.acc += player.power
-                    if event.key == pygame.K_UP or keys[pygame.K_UP]:
+                    if event.key == pygame.K_UP:
                         player.accY -= player.power
-                    if event.key == pygame.K_DOWN or keys[pygame.K_DOWN]:
+                    if event.key == pygame.K_DOWN:
                         player.accY += player.power
                     if event.key == pygame.K_ESCAPE:
                         pygame.quit()
@@ -322,14 +322,16 @@ def Main():
                 fired = False
             hits = pygame.sprite.groupcollide(inimigos, tiros, True, True)
             for hit in hits:
-                m = Inimigo(assets['mob_img'], random.randrange(1,5)) 
-                if m != None: 
-                    all_sprites.add(m)
-                    inimigos.add(m)
+                m = Inimigo(assets['mob_img'], random.randint(1,5))  
+                all_sprites.add(m)
+                inimigos.add(m)
             hit = pygame.sprite.spritecollide(player, inimigos, True, pygame.sprite.collide_circle)            
             if hit:
                 player.HP -= 1
                 all_sprites.add(player)
+                m = Inimigo(assets['mob_img'], random.randint(1,5))  
+                all_sprites.add(m)
+                inimigos.add(m)
             
 
             screen.fill(BLACK)
@@ -339,8 +341,10 @@ def Main():
             for car in inimigos:
                 car.updateSpeed(background_aceleration)
                 if car.rect.y >=HEIGHT:
-                    car.rect.x = random.randrange(WIDTH - car.rect.width)
-                    car.rect.y = random.randrange(-100, -50)
+                    car.kill()
+                    c2 = Inimigo(assets['mob_img'],random.randint(1,5))
+                    all_sprites.add(c2)
+                    inimigos.add(c2)
             all_sprites.update()        
             
             ##----Background movement----##
