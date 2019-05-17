@@ -34,22 +34,22 @@ std_width = int(WIDTH/10)
 #carregando a intro do jogo (tela)
 
 def game_intro():
-    intro = True 
-    while intro:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                quit()
-        screen.fill(WHITE)
-        LargeText= pygame.font.Font('freesansbold.ttf', 115)
-        TextSurf, TextRect = background("Plantation", LargeText)
-        TextRect.center = ((WIDTH/2), (HEIGHT/2))
-        screen.blit(TextSurf, TextRect)
-        pygame.display.update()
-        clock.tick(15)
-    
-        
-
+#    intro = True 
+#    while intro:
+#        for event in pygame.event.get():
+#            if event.type == pygame.QUIT:
+#                pygame.quit()
+#                quit()
+#        screen.fill(WHITE)
+#        LargeText= pygame.font.Font('freesansbold.ttf', 115)
+#        TextSurf, TextRect = background("Plantation", LargeText)
+#        TextRect.center = ((WIDTH/2), (HEIGHT/2))
+#        screen.blit(TextSurf, TextRect)
+#        pygame.display.update()
+#        clock.tick(15)
+#    
+#        
+    pass
 
 def load_assets(img_dir):
     assets = {}
@@ -91,6 +91,7 @@ class Player (pygame.sprite.Sprite):
         self.rect.bottom = HEIGHT - self.size
         self.firerate = 20
         self.burstfire = 0
+        self.HP = 5
         
         #Criando atributos de tanque de gasolina 
         
@@ -164,10 +165,11 @@ all_sprites = pygame.sprite.Group()
 inimigos = pygame.sprite.Group()
 tiros = pygame.sprite.Group()
 
-for i in range(5):
-    a = Inimigo(assets['mob_img'])
-    all_sprites.add(a)
-    inimigos.add(a)
+for i in range(1,6):
+    a = Inimigo(assets['mob_img'],i)
+    if a != None:
+        all_sprites.add(a)
+        inimigos.add(a)
     
     
 all_sprites.add(player)
@@ -180,6 +182,8 @@ def Main():
     fired = False
     fired_cooldown = 0
     Shots_Fired = 0
+    r_down = False
+    l_down = False
     
     background = assets['background']
     background = pygame.transform.scale(background, (WIDTH, HEIGHT))
@@ -195,7 +199,8 @@ def Main():
         game_intro()
         running = True
         while running:
-            
+            if player.HP <= 0:
+                pygame.quit()
             keys = pygame.key.get_pressed()  #checking pressed keys
             # Ajusta a velocidade do jogo.
             clock.tick(FPS)
@@ -208,9 +213,11 @@ def Main():
                     running = False
                 
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_LEFT or keys[pygame.K_LEFT]:
+                    if event.key == pygame.K_LEFT:
+                        l_down = True
                         player.acc -= player.power
-                    if event.key == pygame.K_RIGHT or keys[pygame.K_RIGHT]:
+                    if event.key == pygame.K_RIGHT:
+                        r_down = True
                         player.acc += player.power
                     if event.key == pygame.K_ESCAPE:
                         pygame.quit()
@@ -219,9 +226,16 @@ def Main():
             
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_LEFT:
+                        l_down = False
                         player.acc = 0
+                        if r_down:
+                            player.acc += player.power
+                           
                     if event.key == pygame.K_RIGHT:
+                        r_down = False
                         player.acc = 0
+                        if l_down:
+                            player.acc -= player.power
                     if event.key == pygame.K_UP:
                         player.firerate = 10
             if keys[pygame.K_SPACE] and not fired:
@@ -241,11 +255,14 @@ def Main():
                 fired = False
             hits = pygame.sprite.groupcollide(inimigos, tiros, True, True)
             for hit in hits:
-                m = Inimigo(assets['mob_img']) 
-                all_sprites.add(m)
-                inimigos.add(m)
-                        
-            
+                m = Inimigo(assets['mob_img'], random.randrange(1,5)) 
+                if m != None: 
+                    all_sprites.add(m)
+                    inimigos.add(m)
+            hit = pygame.sprite.spritecollide(player, inimigos, True, pygame.sprite.collide_circle)            
+            if hit:
+                player.HP -= 1
+                all_sprites.add(player)
             
 
             screen.fill(BLACK)
