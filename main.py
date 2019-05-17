@@ -33,22 +33,62 @@ std_width = int(WIDTH/10)
 
 #carregando a intro do jogo (tela)
 
+font = pygame.font.SysFont("comicsansms", 72)
+ 
+
+#função para renderizar texto:
+
+def text_format(message,font, textSize, textColor):
+    newFont=pygame.font.Font(None,textSize)
+    newText=newFont.render(message, 0, textColor)
+ 
+    return newText
+
+
+#carregando a intro do jogo (tela)
+
 def game_intro():
-#    intro = True 
-#    while intro:
-#        for event in pygame.event.get():
-#            if event.type == pygame.QUIT:
-#                pygame.quit()
-#                quit()
-#        screen.fill(WHITE)
-#        LargeText= pygame.font.Font('freesansbold.ttf', 115)
-#        TextSurf, TextRect = background("Plantation", LargeText)
-#        TextRect.center = ((WIDTH/2), (HEIGHT/2))
-#        screen.blit(TextSurf, TextRect)
-#        pygame.display.update()
-#        clock.tick(15)
-#    
-#        
+    
+    menu=True
+    selected="start"
+ 
+    while menu:
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                pygame.quit()
+                quit()
+            if event.type==pygame.KEYDOWN:
+                if event.key==pygame.K_RIGHT:
+                    selected="start"
+                    return True
+                elif event.key==pygame.K_LEFT:
+                    selected="quit"
+                    return False 
+    
+    
+    
+        screen.fill(WHITE)
+        title=text_format("Plantation", font, 90, BLACK)
+        if selected=="start":
+            text_start=text_format("START", font, 75, BLACK)
+        else:
+            text_start = text_format("START", font, 75, BLACK)
+        if selected=="quit":
+            text_quit=text_format("QUIT", font, 75, WHITE)
+        else:
+            text_quit = text_format("QUIT", font, 75, BLACK)
+                        
+        title_rect=title.get_rect()
+        start_rect=text_start.get_rect()
+        quit_rect=text_quit.get_rect()
+        screen.blit(title, (WIDTH/2 - (title_rect[2]/2), 80))
+        screen.blit(text_start, (WIDTH/2 - (start_rect[2]/2), 300))
+        screen.blit(text_quit, (WIDTH/2 - (quit_rect[2]/2), 360))
+        pygame.display.update()
+        clock.tick(FPS)
+#        screen.set_caption("Python - Pygame Simple Main Menu Selection")
+        
+        
     pass
 
 def load_assets(img_dir):
@@ -216,8 +256,7 @@ def Main():
 
     
     try:
-        game_intro()
-        running = True
+        running = game_intro()
         while running:
             if player.HP <= 0:
                 pygame.quit()
