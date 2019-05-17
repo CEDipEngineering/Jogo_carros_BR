@@ -83,12 +83,15 @@ class Player (pygame.sprite.Sprite):
         self.image.set_colorkey((0,0,0))
         self.size = 15
         self.acc = 0
+        self.accY = 0
         self.speed = 0
+        self.speedY = 0
         self.power = 0.15
         self.SpeedLimit = 4
         self.xpos = WIDTH / 2
         self.rect.centerx = self.xpos
-        self.rect.bottom = HEIGHT - self.size
+        self.ypos = HEIGHT - self.size
+        self.rect.bottom = self.ypos
         self.firerate = 20
         self.burstfire = 0
         self.HP = 5
@@ -110,14 +113,21 @@ class Player (pygame.sprite.Sprite):
                 self.speed = self.SpeedLimit
             else:
                 self.speed = -self.SpeedLimit
+                
+        if abs(self.speedY) <= self.SpeedLimit:
+            self.speedY += self.accY
+        else:
+            if self.speedY > 0:
+                self.speedY = self.SpeedLimit
+            else:
+                self.speedY = -self.SpeedLimit
         
         self.xpos += self.speed
-        
+        self.ypos += self.speedY
         
         # Position
-        self.rect.centerx = WIDTH / 2
-        self.rect.bottom = HEIGHT - 15
         self.rect.centerx = self.xpos
+        self.rect.bottom = self.ypos
         
         #Keep in screen (Crash into walls)
         if self.xpos >= WIDTH:
@@ -128,6 +138,16 @@ class Player (pygame.sprite.Sprite):
             self.xpos = 0
             self.speed = 0
             self.acc = 0
+            
+        #Keep in the bottom area
+        if self.ypos <= HEIGHT - 200:
+            self.ypos = HEIGHT - 200
+            self.speedY = 0
+            self.accY = 0
+        if self.ypos >= HEIGHT - self.size:
+            self.ypos = HEIGHT - self.size
+            self.speedY = 0
+            self.accY = 0
         
         #código de implementação do tanque de gasolina 
 #        
@@ -219,9 +239,13 @@ def Main():
                     if event.key == pygame.K_RIGHT:
                         r_down = True
                         player.acc += player.power
+                    if event.key == pygame.K_UP or keys[pygame.K_UP]:
+                        player.accY -= player.power
+                    if event.key == pygame.K_DOWN or keys[pygame.K_DOWN]:
+                        player.accY += player.power
                     if event.key == pygame.K_ESCAPE:
                         pygame.quit()
-                    if event.key == pygame.K_UP:
+                    if event.key == pygame.K_RSHIFT:
                         player.firerate = 0.01
             
                 if event.type == pygame.KEYUP:
@@ -237,6 +261,10 @@ def Main():
                         if l_down:
                             player.acc -= player.power
                     if event.key == pygame.K_UP:
+                        player.accY = 0
+                    if event.key == pygame.K_DOWN:
+                        player.accY = 0
+                    if event.key == pygame.K_RSHIFT:
                         player.firerate = 10
             if keys[pygame.K_SPACE] and not fired:
                 if Shots_Fired<=player.burstfire:
