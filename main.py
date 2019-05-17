@@ -25,11 +25,30 @@ HEIGHT = consts['HEIGHT']
 WIDTH = consts['WIDTH']
 BLACK = consts['BLACK']
 RED = consts['RED']
+WHITE = consts['WHITE']
 img_dir = path.join(path.dirname(__file__), 'Assets')
 img_dir = path.join(img_dir,'img')
 std_width = int(WIDTH/10)
 
 
+#carregando a intro do jogo (tela)
+
+def game_intro():
+    intro = True 
+    while intro:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+        screen.fill(WHITE)
+        LargeText= pygame.font.Font('freesansbold.ttf', 115)
+        TextSurf, TextRect = background("Plantation", LargeText)
+        TextRect.center = ((WIDTH/2), (HEIGHT/2))
+        screen.blit(TextSurf, TextRect)
+        pygame.display.update()
+        clock.tick(15)
+    
+        
 
 
 def load_assets(img_dir):
@@ -173,6 +192,7 @@ def Main():
 
     
     try:
+        game_intro()
         running = True
         while running:
             
