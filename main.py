@@ -226,21 +226,21 @@ def Main():
                         player.firerate = 0.01
             
                 if event.type == pygame.KEYUP:
-                    if event.key == pygame.K_LEFT:
+                    if event.key == pygame.K_a:
                         l_down = False
                         player.acc = 0
                         if r_down:
                             player.acc += player.power
                            
-                    if event.key == pygame.K_RIGHT:
+                    if event.key == pygame.K_d:
                         r_down = False
                         player.acc = 0
                         if l_down:
                             player.acc -= player.power
                             
-                    if event.key == pygame.K_UP:
+                    if event.key == pygame.K_w:
                         player.accY = 0
-                    if event.key == pygame.K_DOWN:
+                    if event.key == pygame.K_s:
                         player.accY = 0
                     if event.key == pygame.K_RSHIFT:
                         player.firerate = 10
