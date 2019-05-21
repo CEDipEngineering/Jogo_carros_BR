@@ -20,7 +20,7 @@ class Inimigo(pygame.sprite.Sprite):
         self.image = img
         self.image.set_colorkey((0,0,0))
         self.rect = self.image.get_rect()
-        self.radius = int(self.rect.width * .85 / 2)
+        self.radius = int(self.rect.width * 0.35 / 2)
         self.speedy = 0
         self.boss = False
         self.rect.centerx = col * (WIDTH/5)-self.rect.width
