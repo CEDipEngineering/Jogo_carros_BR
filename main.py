@@ -8,6 +8,7 @@ import pygame
 from os import path
 import json
 import random
+import time
 
 
 pygame.init()
@@ -68,25 +69,47 @@ def game_intro():
     
     
         screen.blit(background, background_rect)
-        title=text_format("Plantation", font, 90, BLACK)
+        title=text_format("Road to Victory", font, 50, BLACK)
         if selected=="start":
             text_start=text_format("START", font, 75, BLACK)
+            text_start2=text_format("Press right key to start", font, 35, BLACK)
         else:
             text_start = text_format("START", font, 75, BLACK)
         if selected=="quit":
             text_quit=text_format("QUIT", font, 75, WHITE)
         else:
             text_quit = text_format("QUIT", font, 75, BLACK)
+            text_quit2 = text_format("Press ESC to quit", font, 35, BLACK)
                         
         title_rect=title.get_rect()
         start_rect=text_start.get_rect()
         quit_rect=text_quit.get_rect()
         screen.blit(title, (WIDTH/2 - (title_rect[2]/2), 80))
         screen.blit(text_start, (WIDTH/2 - (start_rect[2]/2), 300))
-        screen.blit(text_quit, (WIDTH/2 - (quit_rect[2]/2), 360))
+        screen.blit(text_start2, (WIDTH/2 - (start_rect[2]/2) - 50, 350))
+        screen.blit(text_quit, (WIDTH/2 - (quit_rect[2]/2), 400))
+        screen.blit(text_quit2, (WIDTH/2 - (quit_rect[2]/2) - 40, 450))
         pygame.display.update()
         clock.tick(FPS)
 #        screen.set_caption("Python - Pygame Simple Main Menu Selection")
+        
+def carregar():
+    screen.blit(background, background_rect)
+    i = 3
+    while i != 0:
+        text_iniciate = text_format("{0}".format(i), font, 100, RED)
+        
+     
+        i = i - 1
+        
+     
+        iniciate_rect=text_iniciate.get_rect()
+        screen.blit(text_iniciate, (WIDTH/2 - (iniciate_rect[2]/2), 300))
+        screen.blit
+        pygame.display.update()
+        time.sleep(1)
+        screen.blit(background, background_rect)
+ 
         
         
     pass
@@ -159,10 +182,12 @@ def Main():
     
     try:
         running = game_intro()
+        carregar()
         while running:
             if player.HP <= 0:
                 running = game_intro()
                 if running:
+                    carregar()
                     for mob in inimigos:
                         mob.kill()
                     for i in range(1,6):
