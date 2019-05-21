@@ -61,7 +61,7 @@ def game_intro():
                 if event.key==pygame.K_RIGHT:
                     selected="start"
                     return True
-                elif event.key==pygame.K_LEFT:
+                elif event.key==pygame.K_ESCAPE:
                     selected="quit"
                     return False 
     
