@@ -33,7 +33,7 @@ std_width = int(WIDTH/10)
 
 #carregando a intro do jogo (tela)
 
-font = pygame.font.SysFont("comicsansms", 72)
+
  
 
 #função para renderizar texto:
@@ -108,7 +108,7 @@ def Transform_Imgs(assets):
     return assets
     
     
-
+font = pygame.font.SysFont("comicsansms", 72)
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 assets = load_assets(img_dir)
 assets = Transform_Imgs(assets)
@@ -159,7 +159,17 @@ def Main():
         running = game_intro()
         while running:
             if player.HP <= 0:
-                pygame.quit()
+                running = game_intro()
+                if running:
+                    for mob in inimigos:
+                        mob.kill()
+                    for i in range(1,6):
+                        a = Inimigo(assets['mob_img'],i)
+                        if a != None:
+                            all_sprites.add(a)
+                            inimigos.add(a)
+                    player.HP = 5
+                    
             keys = pygame.key.get_pressed()  #checking pressed keys
             # Ajusta a velocidade do jogo.
             clock.tick(FPS)
