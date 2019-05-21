@@ -242,7 +242,7 @@ def Main():
                         player.accY = 0
                     if event.key == pygame.K_s:
                         player.accY = 0
-                    if event.key == pygame.K_RSHIFT:
+                    if event.key == pygame.K_LSHIFT:
                         player.firerate = 10
                         
             if keys[pygame.K_SPACE] and not fired:
