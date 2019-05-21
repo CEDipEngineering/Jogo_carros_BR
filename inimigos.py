@@ -23,7 +23,7 @@ class Inimigo(pygame.sprite.Sprite):
         self.radius = int(self.rect.width * .85 / 2)
         self.speedy = 0
         self.BOSS = False
-        self.rect.centerx = col * WIDTH/5
+        self.rect.x = col * (WIDTH-self.rect.width)/5
         self.rect.top = random.randint(-100,-50)
     def update(self):
 #        self.rect.top += self.speedy
