@@ -67,7 +67,7 @@ def game_intro():
     
     
     
-        screen.fill(WHITE)
+        screen.blit(background, background_rect)
         title=text_format("Plantation", font, 90, BLACK)
         if selected=="start":
             text_start=text_format("START", font, 75, BLACK)
@@ -113,6 +113,10 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 assets = load_assets(img_dir)
 assets = Transform_Imgs(assets)
 
+#carregando o plano de fundo (para tela inicial)
+background = assets['background']
+background_rect = background.get_rect()
+
 
 from inimigos import Inimigo
 from bullet import Bullet       
@@ -146,13 +150,11 @@ def Main():
     l_down = False
     
     background = assets['background']
+    background_rect = background.get_rect()
     background = pygame.transform.scale(background, (WIDTH, HEIGHT))
-#    background2 = pygame.transform.scale(background, (WIDTH, HEIGHT))
     background_posY = 0
     background_aceleration = 10 
     background_maxspeed = 7.5
-#    background.get_rect().y = 0
-#    background2.get_rect().y = -HEIGHT
 
     
     try:
