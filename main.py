@@ -182,20 +182,20 @@ def Main():
                     running = False
                 
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_LEFT:
+                    if event.key == pygame.K_a:
                         l_down = True
                         player.acc -= player.power
-                    if event.key == pygame.K_RIGHT:
+                    if event.key == pygame.K_d:
                         r_down = True
                         player.acc += player.power
                         
-                    if event.key == pygame.K_UP:
+                    if event.key == pygame.K_w:
                         player.accY -= player.power
-                    if event.key == pygame.K_DOWN:
+                    if event.key == pygame.K_s:
                         player.accY += player.power
                     if event.key == pygame.K_ESCAPE:
                         pygame.quit()
-                    if event.key == pygame.K_RSHIFT:
+                    if event.key == pygame.K_LSHIFT:
                         player.firerate = 0.01
             
                 if event.type == pygame.KEYUP:
