@@ -183,7 +183,6 @@ def Main():
     l_down = False
     
     background = assets['background']
-#    background_rect = background.get_rect()
     background = pygame.transform.scale(background, (WIDTH, HEIGHT))
     background_posY = 0
     background_aceleration = 10 
@@ -283,13 +282,13 @@ def Main():
                 m = Inimigo(assets['mob_img'], random.randint(1,5))  
                 all_sprites.add(m)
                 inimigos.add(m)
-#            for mob in inimigos:
-#                hits2 = pygame.sprite.spritecollide(mob,inimigos,False)
-#                if hits2:
-#                    mob.kill()
-#                    m = Inimigo(assets['mob_img'], random.randint(1,5))  
-#                    all_sprites.add(m)
-#                    inimigos.add(m)
+            for mob in inimigos:
+                hits2 = pygame.sprite.spritecollide(mob,inimigos,False)
+                if hits2:
+                    mob.kill()
+                    m = Inimigo(assets['mob_img'], random.randint(1,5))  
+                    all_sprites.add(m)
+                    inimigos.add(m)
             screen.fill(BLACK)
             
             
@@ -300,6 +299,8 @@ def Main():
                     car.kill()
                     c2 = Inimigo(assets['mob_img'],random.randint(1,5))
                     all_sprites.add(c2)
+                    hits2 = pygame.sprite.spritecollide(c2,inimigos,False)
+                    
                     inimigos.add(c2)
             all_sprites.update()        
             
