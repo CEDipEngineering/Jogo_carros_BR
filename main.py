@@ -269,11 +269,15 @@ def Main():
             if fired_cooldown >= player.firerate:
                 fired_cooldown = 0
                 fired = False
-            hits = pygame.sprite.groupcollide(inimigos, tiros, True, True)
+            hits = pygame.sprite.groupcollide(inimigos, tiros, False, True)
             for hit in hits:
-                m = Inimigo(assets['mob_img'], random.randint(1,5))  
-                all_sprites.add(m)
-                inimigos.add(m)
+                hit.HP -= 1
+                if hit.HP <= 0:
+                    m = Inimigo(assets['mob_img'],hit.col)
+                    inimigos.add(m)
+                    all_sprites.add(m)
+                    
+
             hit = pygame.sprite.spritecollide(player, inimigos, True, pygame.sprite.collide_circle)            
             if hit:
                 player.HP -= 1
@@ -281,13 +285,13 @@ def Main():
                 m = Inimigo(assets['mob_img'], random.randint(1,5))  
                 all_sprites.add(m)
                 inimigos.add(m)
-            for mob in inimigos:
-                hits2 = pygame.sprite.spritecollide(mob,inimigos,False)
-                if hits2:
-                    mob.kill()
-                    m = Inimigo(assets['mob_img'], random.randint(1,5))  
-                    all_sprites.add(m)
-                    inimigos.add(m)
+#            for mob in inimigos:
+#                hits2 = pygame.sprite.spritecollide(mob,inimigos,False)
+#                if hits2:
+#                    mob.kill()
+#                    m = Inimigo(assets['mob_img'], random.randint(1,5))  
+#                    all_sprites.add(m)
+#                    inimigos.add(m)
             screen.fill(BLACK)
             
             

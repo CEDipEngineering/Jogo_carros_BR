@@ -14,7 +14,7 @@ from consts import HEIGHT
 class Inimigo(pygame.sprite.Sprite):
     
     # Construtor da classe.
-    def __init__(self, img, col):
+    def __init__(self, img, col = 1, size = 15, boss = False):
         pygame.sprite.Sprite.__init__(self)
         
         self.image = img
@@ -22,11 +22,19 @@ class Inimigo(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.radius = int(self.rect.width * 0.35 / 2)
         self.speedy = 0
-        self.boss = False
+        self.boss = boss
+        self.speedx = 0
+        self.size = size
+        self.col = col
         self.rect.centerx = col * (WIDTH/5)-self.rect.width
-        self.rect.top = random.randint(-100,-50)
+        self.rect.top = random.randint(-300,-100)
+        self.HP = 1
     def update(self):
-#        self.rect.top += self.speedy
+        if self.HP <=0:
+            self.kill()
+            self.boss = False
+        if self.boss:
+            pass
         pass
     
     def updateSpeed(self, speedy):
