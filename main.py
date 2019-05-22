@@ -191,6 +191,7 @@ def Main():
     
     try:
         running = game_intro()
+        load_fase_screen()
         carregar()
         while running:
             if player.HP <= 0:
