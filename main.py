@@ -117,8 +117,9 @@ def carregar():
 
 def load_fase_screen(img, txt1 = ()):
     
-    txt, txtx, txty = txt1
-    image = pygame.transform.scale(img, +90)
+#    txt, txtx, txty = txt1
+    image = img
+    image = pygame.transform.scale(img, 90)
     screen.blit(image)
  
         
@@ -131,7 +132,7 @@ def load_assets(img_dir):
     assets['bullet_img'] = pygame.image.load(path.join(img_dir, 'bullet_3.png')).convert_alpha()
     assets['mob_img'] = pygame.image.load(path.join(img_dir, "Blue2.png")).convert()
     assets['background'] = pygame.image.load(path.join(img_dir, 'road.png')).convert()
-    assets['tela_1'] = pygame.image.load(path.join(img_dir, 'road.png')).convert()
+    assets['riogsul'] = pygame.image.load(path.join(img_dir, 'riogsul.png')).convert()
     
     return assets
 
@@ -191,7 +192,7 @@ def Main():
     
     try:
         running = game_intro()
-        load_fase_screen()
+        load_fase_screen(assets['riogsul'])
         carregar()
         while running:
             if player.HP <= 0:
