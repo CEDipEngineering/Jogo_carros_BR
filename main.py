@@ -194,14 +194,12 @@ for i in range(1,6):
     dado = random.randint(1,25)
     if dado <= 5:
         a = Obstaculo(random.choice([assets['obstaculo1_img'],assets['obstaculo2_img']]),i)
-        if a != None:
-            all_sprites.add(a)
-            inimigos.add(a)
+        all_sprites.add(a)
+        inimigos.add(a)
     else:
         a = Inimigo(assets['mob_img'],i)
-        if a != None:
-            all_sprites.add(a)
-            inimigos.add(a)
+        all_sprites.add(a)
+        inimigos.add(a)
 
     
     
@@ -327,7 +325,7 @@ def Main():
                 b = Bullet(assets['bullet_img'], Boss.rect.centerx, Boss.rect.bottom, 0)
                 b.yspeed *= -1
                 tiros.add()
-                Boss.Bossfire(b)
+                all_sprites.add()
                 
             
                 
