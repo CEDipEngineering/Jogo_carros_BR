@@ -142,18 +142,27 @@ def Transform_Imgs(assets):
     
 def highscore(score):
     
-    list_core = []
-    list_core.append(score)
-            
-    for index in range(len(list_core)):
+    list_score = []
+    list_score.push(score)
+    high_score = max(list_score)
     
-        if list_core[index] > list_core[index-1]:
-            high_score = list_core[index]
-            return high_score
-        else:
-            high_score = high_score[index-1] 
-            return high_score 
-        
+    if len(list_score) > 5:
+        list_score.remove(min(list_score))
+    
+    return list_score, high_score   
+
+    
+    
+            
+#    for index in range(len(list_core)):
+#    
+#        if list_core[index] > list_core[index-1]:
+#            high_score = list_core[index]
+#            return high_score
+#        else:
+#            high_score = high_score[index-1] 
+#            return high_score 
+#        
     
     
 font = pygame.font.SysFont("comicsansms", 72)
