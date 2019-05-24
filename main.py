@@ -195,11 +195,11 @@ for i in range(1,6):
     if dado <= 5:
         a = Obstaculo(random.choice([assets['obstaculo1_img'],assets['obstaculo2_img']]),i)
         all_sprites.add(a)
-        inimigos.add(a)
+        obstaculos.add(a)
     else:
         a = Inimigo(assets['mob_img'],i)
         all_sprites.add(a)
-        inimigos.add(a)
+        inimigos.add(a)    
 
     
     
@@ -313,19 +313,25 @@ def Main():
             for hit in hits:
                 hit.HP -= 1
                 if hit.HP <= 0 and not hit.boss:
-                    m = Inimigo(assets['mob_img'],hit.col)
-                    inimigos.add(m)
-                    all_sprites.add(m)
-                    counter += 1
+                    dado = random.randint(1,25)
+                    i = -1 
+                    if dado <= 5:
+                        a = Obstaculo(random.choice([assets['obstaculo1_img'],assets['obstaculo2_img']]),i)
+                        all_sprites.add(a)
+                        obstaculos.add(a)
+                    else:
+                        a = Inimigo(assets['mob_img'],i)
+                        all_sprites.add(a)
+                        inimigos.add(a)
                 if hit.boss and hit.HP <= 0:
                     BossAlive = False
                     
                     
             if BossAlive and frame_count%20 == 0:
                 b = Bullet(assets['bullet_img'], Boss.rect.centerx, Boss.rect.bottom, 0)
-                b.yspeed *= -1
-                tiros.add()
-                all_sprites.add()
+                b.yspeed = 10
+                tiros.add(b)
+                all_sprites.add(b)
                 
             
                 
@@ -365,8 +371,16 @@ def Main():
                     car.kill()
                     c2 = Inimigo(assets['mob_img'],car.col)
                     all_sprites.add(c2)
-                    
                     inimigos.add(c2)
+                    
+            for objeto in obstaculos:
+                objeto.updateSpeed(background_aceleration)
+                if objeto.rect.y >=HEIGHT:
+                    objeto.kill()
+                    c2 = Inimigo(assets['mob_img'],car.col)
+                    all_sprites.add(c2)
+                    obstaculos.add(c2)    
+
             all_sprites.update()        
             if frame_count == 60*10:
                 for enemy in inimigos:

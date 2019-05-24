@@ -29,6 +29,12 @@ class Inimigo(pygame.sprite.Sprite):
         self.rect.centerx = col * (WIDTH/5)-self.rect.width
         self.rect.top = random.randint(-300,-100)
         self.HP = 1
+        if self.boss:
+            self.rect.centerx = WIDTH/2
+            self.rect.y = 5
+            self.speedx = random.randint(-5,5)
+        
+        
     def update(self):
         if self.HP <=0:
             self.kill()
@@ -43,6 +49,7 @@ class Inimigo(pygame.sprite.Sprite):
             self.rect.x += self.speedx    
 
         pass
+    
     
     def updateSpeed(self, speedy):
         if not self.boss:
