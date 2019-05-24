@@ -26,7 +26,8 @@
         255,
         255
     ],
-    "WIDTH": 480,
+    "WIDTH": 1080,
+    "WIDTH_STREET": 480,
     "YELLOW": [
         255,
         255,

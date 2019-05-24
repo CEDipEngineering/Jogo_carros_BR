@@ -7,7 +7,8 @@ Created on Tue May  7 16:01:00 2019
 
 import json 
 
-WIDTH = 480
+WIDTH = 1080
+WIDTH_STREET = 480
 HEIGHT = 720
 FPS = 60 
 WHITE = (255, 255, 255)
@@ -22,7 +23,7 @@ consts = {'WIDTH': WIDTH, 'HEIGHT': HEIGHT,
           'FPS': FPS, 'WHITE': WHITE,
           'BLACK': BLACK, 'RED': RED,
           'GREEN': GREEN, 'BLUE': BLUE,
-          'YELLOW': YELLOW}
+          'YELLOW': YELLOW, 'WIDTH_STREET': WIDTH_STREET}
 
 
 with open('consts.txt','w') as consts_txt:

@@ -30,6 +30,7 @@ with open('dic_tanque.txt', 'r') as dic_tanque_txt:
 FPS = consts['FPS']
 HEIGHT = consts['HEIGHT']
 WIDTH = consts['WIDTH']
+WIDTH_STREET = consts['WIDTH_STREET']
 BLACK = consts['BLACK']
 RED = consts['RED']
 WHITE = consts['WHITE']
@@ -115,12 +116,12 @@ def carregar():
         time.sleep(1)
         screen.blit(background, background_rect)
 
-def load_fase_screen(img, txt1 = ()):
+def load_fase_screen(img):
     
-#    txt, txtx, txty = txt1
-#    image = pygame.transform.scale(img, (WIDTH,HEIGHT))
-    image = img
-    screen.blit(image,background_rect)
+
+    image = pygame.transform.scale(img, (WIDTH,HEIGHT))
+    screen.blit(image, (0,0))
+    pygame.display.update()
     time.sleep(5)
 
 
@@ -228,7 +229,7 @@ def Main():
     
     try:
         running = game_intro()
-#        load_fase_screen(assets['riogsul'])
+        load_fase_screen(assets['riogsul'])
 #        load_fase_screen(assets['riogsul2'])
         carregar()
         BossAlive = False
