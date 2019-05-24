@@ -14,8 +14,6 @@ from obstaculos import Obstaculo
 from bullet import Bullet       
 from Player import Player
 
-#%%
-
 
 pygame.init()
 
@@ -36,7 +34,7 @@ RED = consts['RED']
 WHITE = consts['WHITE']
 img_dir = path.join(path.dirname(__file__), 'Assets')
 img_dir = path.join(img_dir,'img')
-std_width = int(WIDTH/10)
+std_width = int(WIDTH_STREET/10)
 
 
 #carregando a intro do jogo (tela)
@@ -144,6 +142,7 @@ def Transform_Imgs(assets):
     assets['mob_img'] = pygame.transform.scale(assets['mob_img'], (std_width,95))
     assets['obstaculo1_img'] = pygame.transform.scale(assets['obstaculo1_img'], (std_width,95))
     assets['obstaculo2_img'] = pygame.transform.scale(assets['obstaculo2_img'], (std_width,95))
+    assets['background'] = pygame.transform.scale(assets['background'], (WIDTH_STREET, HEIGHT))
     
     return assets
     
@@ -219,7 +218,6 @@ def Main():
     frame_count = 0
     
     background = assets['background']
-    background = pygame.transform.scale(background, (WIDTH, HEIGHT))
     background_posY = 0
     background_aceleration = 10 
     background_maxspeed = 7.5
@@ -398,9 +396,9 @@ def Main():
             else:
                 background_aceleration += 0           
             relative_y = background_posY % background.get_rect().height
-            screen.blit(background, (0,relative_y - background.get_rect().height))
+            screen.blit(background, ((WIDTH-WIDTH_STREET)/2,relative_y - background.get_rect().height))
             if relative_y < HEIGHT:
-                screen.blit(background, (0,relative_y))
+                screen.blit(background, ((WIDTH-WIDTH_STREET)/2,relative_y))
             background_posY += background_aceleration
             ##---------------------------##
             

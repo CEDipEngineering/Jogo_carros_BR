@@ -7,8 +7,18 @@ Created on Mon May  6 22:00:55 2019
 
 import pygame
 import random
-from consts import WIDTH
-from consts import HEIGHT
+import json
+
+with open('consts.txt', 'r') as consts_txt:
+    conteudo = consts_txt.read()
+    consts = json.loads(conteudo)
+
+FPS = consts['FPS']
+HEIGHT = consts['HEIGHT']
+WIDTH = consts['WIDTH']
+WIDTH_STREET = consts['WIDTH_STREET'] 
+BLACK = consts['BLACK']
+RED = consts['RED']
 
 
 class Inimigo(pygame.sprite.Sprite):
@@ -26,11 +36,11 @@ class Inimigo(pygame.sprite.Sprite):
         self.speedx = 0
         self.size = size
         self.col = col
-        self.rect.centerx = col * (WIDTH/5)-self.rect.width
+        self.rect.centerx = col * (WIDTH_STREET/5)-self.rect.width
         self.rect.top = random.randint(-300,-100)
         self.HP = 1
         if self.boss:
-            self.rect.centerx = WIDTH/2
+            self.rect.centerx = WIDTH_STREET/2
             self.rect.y = 5
             self.speedx = random.randint(-5,5)
         
@@ -40,10 +50,10 @@ class Inimigo(pygame.sprite.Sprite):
             self.kill()
             self.boss = False
         if self.boss:
-            if self.rect.x <= 0:
+            if self.rect.x <= (WIDTH-WIDTH_STREET)/2:
                 self.speedx = random.randint(2,7)
                 self.rect.x = 1
-            if self.rect.x >= WIDTH - self.rect.width:
+            if self.rect.x >= (WIDTH-WIDTH_STREET)/2 + WIDTH_STREET - self.rect.width:
                 self.speedx = random.randint(-7,-2)
                 self.rect.x = WIDTH - self.rect.width -1
             self.rect.x += self.speedx    

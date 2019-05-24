@@ -5,8 +5,20 @@ Created on Tue May 21 13:31:57 2019
 @author: Carlos Dip
 """
 import pygame
-from consts import HEIGHT
-from consts import WIDTH
+import json
+
+with open('consts.txt', 'r') as consts_txt:
+    conteudo = consts_txt.read()
+    consts = json.loads(conteudo)
+
+FPS = consts['FPS']
+HEIGHT = consts['HEIGHT']
+WIDTH = consts['WIDTH']
+WIDTH_STREET = consts['WIDTH_STREET'] 
+BLACK = consts['BLACK']
+RED = consts['RED']
+
+
 class Player (pygame.sprite.Sprite):
     
     def __init__(self, img):
@@ -65,12 +77,12 @@ class Player (pygame.sprite.Sprite):
         self.rect.bottom = self.ypos
         
         #Keep in screen (Crash into walls)
-        if self.xpos >= WIDTH:
-            self.xpos = WIDTH
+        if self.xpos >= (WIDTH-WIDTH_STREET)/2 + WIDTH_STREET:
+            self.xpos = (WIDTH-WIDTH_STREET)/2 + WIDTH_STREET
             self.speed = 0
             self.acc = 0
-        if self.xpos <= 0:
-            self.xpos = 0
+        if self.xpos <= (WIDTH-WIDTH_STREET)/2:
+            self.xpos = (WIDTH-WIDTH_STREET)/2
             self.speed = 0
             self.acc = 0
             

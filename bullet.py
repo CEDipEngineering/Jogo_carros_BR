@@ -18,6 +18,7 @@ with open('consts.txt', 'r') as consts_txt:
 FPS = consts['FPS']
 HEIGHT = consts['HEIGHT']
 WIDTH = consts['WIDTH']
+WIDTH_STREET = consts['WIDTH_STREET'] 
 BLACK = consts['BLACK']
 RED = consts['RED']
 
@@ -42,7 +43,7 @@ class Bullet(pygame.sprite.Sprite):
         self.rect.x += self.xspeed
         self.rect.y += self.yspeed
         
-        if self.rect.bottom <=0 or self.rect.centerx >= WIDTH or self.rect.centerx <=0 or self.rect.y >= HEIGHT:
+        if self.rect.bottom <=0 or self.rect.centerx >= (WIDTH-WIDTH_STREET)/2 + WIDTH_STREET or self.rect.centerx <= (WIDTH-WIDTH_STREET)/2 or self.rect.y >= HEIGHT:
             self.kill()
             
     
