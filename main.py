@@ -110,7 +110,6 @@ def carregar():
      
         iniciate_rect=text_iniciate.get_rect()
         screen.blit(text_iniciate, (WIDTH/2 - (iniciate_rect[2]/2), 300))
-        screen.blit
         pygame.display.update()
         time.sleep(1)
         screen.blit(background, background_rect)
@@ -118,13 +117,11 @@ def carregar():
 def load_fase_screen(img, txt1 = ()):
     
 #    txt, txtx, txty = txt1
-    image = img
-    image = pygame.transform.scale(img, 90)
-    screen.blit(image)
- 
-        
-        
-    pass
+#    image = pygame.transform.scale(img, (WIDTH,HEIGHT))
+    image = img.get_rect()
+    screen.blit(image,background_rect)
+    time.sleep(5)
+
 
 def load_assets(img_dir):
     assets = {}
