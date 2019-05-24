@@ -7,15 +7,9 @@ Created on Mon May  6 22:00:55 2019
 
 import pygame
 import random
-import json
+from consts import WIDTH
+from consts import HEIGHT
 
-with open('consts.txt', 'r') as consts_txt:
-    conteudo = consts_txt.read()
-    consts = json.loads(conteudo)
-
-FPS = consts['FPS']
-HEIGHT = consts['HEIGHT']
-WIDTH = consts['WIDTH']
 
 class Inimigo(pygame.sprite.Sprite):
     
@@ -26,18 +20,15 @@ class Inimigo(pygame.sprite.Sprite):
         self.image = img
         self.image.set_colorkey((0,0,0))
         self.rect = self.image.get_rect()
-        self.radius = int(self.rect.width * 0.85 / 2)
+        self.radius = int(self.rect.width * 0.35 / 2)
         self.speedy = 0
         self.boss = boss
-        self.speedx = 5
+        self.speedx = 0
         self.size = size
         self.col = col
         self.rect.centerx = col * (WIDTH/5)-self.rect.width
-        self.rect.top = random.randint(-400,-200)
+        self.rect.top = random.randint(-300,-100)
         self.HP = 1
-        if self.boss:
-            self.rect.centerx = WIDTH/2
-            self.rect.top = 5
     def update(self):
         if self.HP <=0:
             self.kill()
@@ -50,6 +41,7 @@ class Inimigo(pygame.sprite.Sprite):
                 self.speedx = random.randint(-7,-2)
                 self.rect.x = WIDTH - self.rect.width -1
             self.rect.x += self.speedx    
+
         pass
     
     def updateSpeed(self, speedy):
@@ -57,10 +49,6 @@ class Inimigo(pygame.sprite.Sprite):
             self.rect.top += speedy
         else:
             pass
-    
-    def Bossfire(self, bullet):
-        bullet.yspeed *= -1
-        
             
         
         
