@@ -10,6 +10,7 @@ import json
 import random
 import time
 from inimigos import Inimigo
+from obstaculos import Obstaculo
 from bullet import Bullet       
 from Player import Player
 
@@ -74,7 +75,7 @@ def game_intro():
     
     
         screen.blit(background, background_rect)
-        title=text_format("Road to Victory", font, 50, BLACK)
+        title=text_format("Road to Victory", font, 50, WHITE)
         if selected=="start":
             text_start=text_format("START", font, 75, BLACK)
             text_start2=text_format("Press right key to start", font, 35, BLACK)
@@ -130,6 +131,9 @@ def load_assets(img_dir):
     assets['mob_img'] = pygame.image.load(path.join(img_dir, "Blue2.png")).convert()
     assets['background'] = pygame.image.load(path.join(img_dir, 'road.png')).convert()
     assets['riogsul'] = pygame.image.load(path.join(img_dir, 'riogsul.png')).convert()
+    assets['riogsul2'] = pygame.image.load(path.join(img_dir, 'riogsul2.png')).convert()
+    assets['obstaculo1_img'] = pygame.image.load(path.join(img_dir, 'roadblock.png')).convert_alpha()
+    assets['obstaculo2_img'] = pygame.image.load(path.join(img_dir, 'cone.png')).convert_alpha()
     
     return assets
 
@@ -137,6 +141,8 @@ def Transform_Imgs(assets):
     assets['player_img'] = pygame.transform.rotate(assets['player_img'], +90)
     assets['player_img'] = pygame.transform.scale(assets['player_img'], (std_width,95))
     assets['mob_img'] = pygame.transform.scale(assets['mob_img'], (std_width,95))
+    assets['obstaculo1_img'] = pygame.transform.scale(assets['obstaculo1_img'], (std_width,95))
+    assets['obstaculo2_img'] = pygame.transform.scale(assets['obstaculo2_img'], (std_width,95))
     
     return assets
     
@@ -182,12 +188,21 @@ clock = pygame.time.Clock()
 all_sprites = pygame.sprite.Group()            
 inimigos = pygame.sprite.Group()
 tiros = pygame.sprite.Group()
+obstaculos = pygame.sprite.Group()
 
 for i in range(1,6):
-    a = Inimigo(assets['mob_img'],i)
-    if a != None:
-        all_sprites.add(a)
-        inimigos.add(a)
+    dado = random.randint(1,25)
+    if dado <= 5:
+        a = Obstaculo(random.choice([assets['obstaculo1_img'],assets['obstaculo2_img']]),i)
+        if a != None:
+            all_sprites.add(a)
+            inimigos.add(a)
+    else:
+        a = Inimigo(assets['mob_img'],i)
+        if a != None:
+            all_sprites.add(a)
+            inimigos.add(a)
+
     
     
 all_sprites.add(player)
@@ -214,6 +229,7 @@ def Main():
     try:
         running = game_intro()
 #        load_fase_screen(assets['riogsul'])
+#        load_fase_screen(assets['riogsul2'])
         carregar()
         BossAlive = False
         while running:
@@ -332,6 +348,15 @@ def Main():
 #                    m = Inimigo(assets['mob_img'], random.randint(1,5))  
 #                    all_sprites.add(m)
 #                    inimigos.add(m)
+                
+            hit_obst = pygame.sprite.spritecollide(player, obstaculos, True, pygame.sprite.collide_circle)            
+            if hit_obst:
+                player.HP -= 1
+                all_sprites.add(player)
+                o = Obstaculo(random.choice([assets['obstaculo1_img'],assets['obstaculo2_img']]), random.randint(1,5))  
+                all_sprites.add(o)
+                obstaculos.add(o)
+            
             screen.fill(BLACK)
             
             
