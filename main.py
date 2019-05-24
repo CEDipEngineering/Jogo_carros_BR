@@ -302,7 +302,7 @@ def Main():
                     m = Inimigo(assets['mob_img'],hit.col)
                     inimigos.add(m)
                     all_sprites.add(m)
-                    counter += hit 
+                    counter += 1 
                     
             if BossAlive:
                 b = Bullet(assets['bullet_img'], Boss.rect.centerx, Boss.rect.bottom, 0)
