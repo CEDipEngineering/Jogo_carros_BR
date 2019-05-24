@@ -143,6 +143,21 @@ def Transform_Imgs(assets):
     
     return assets
     
+def highscore(score):
+    
+    list_core = []
+    list_core.append(score)
+            
+    for index in range(len(list_core)):
+    
+        if list_core[index] > list_core[index-1]:
+            high_score = list_core[index]
+            return high_score
+        else:
+            high_score = high_score[index-1] 
+            return high_score 
+        
+    
     
 font = pygame.font.SysFont("comicsansms", 72)
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -272,13 +287,19 @@ def Main():
                 fired_cooldown = 0
                 fired = False
             hits = pygame.sprite.groupcollide(inimigos, tiros, False, True)
+            
+            counter = 0
             for hit in hits:
                 hit.HP -= 1
                 if hit.HP <= 0:
                     m = Inimigo(assets['mob_img'],hit.col)
                     inimigos.add(m)
                     all_sprites.add(m)
-                    
+                counter += hit 
+                
+            score = counter 
+            highscore(score)
+
 
             hit = pygame.sprite.spritecollide(player, inimigos, True, pygame.sprite.collide_circle)            
             if hit:
