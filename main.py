@@ -314,14 +314,19 @@ def Main():
             counter = 0
             for hit in hits:
                 hit.HP -= 1
-                if hit.HP <= 0:
+                if hit.HP <= 0 and not hit.boss:
                     m = Inimigo(assets['mob_img'],hit.col)
                     inimigos.add(m)
                     all_sprites.add(m)
-                    counter += 1 
+                    counter += 1
+                if hit.boss and hit.HP <= 0:
+                    BossAlive = False
                     
-            if BossAlive:
+                    
+            if BossAlive and frame_count%20 == 0:
                 b = Bullet(assets['bullet_img'], Boss.rect.centerx, Boss.rect.bottom, 0)
+                b.yspeed *= -1
+                tiros.add()
                 Boss.Bossfire(b)
                 
             
