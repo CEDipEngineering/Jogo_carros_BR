@@ -302,12 +302,13 @@ def Main():
                     m = Inimigo(assets['mob_img'],hit.col)
                     inimigos.add(m)
                     all_sprites.add(m)
+                    counter += hit 
                     
             if BossAlive:
                 b = Bullet(assets['bullet_img'], Boss.rect.centerx, Boss.rect.bottom, 0)
                 Boss.Bossfire(b)
                 
-            counter += hit 
+            
                 
             score = counter 
             highscore(score)
@@ -334,7 +335,7 @@ def Main():
                 car.updateSpeed(background_aceleration)
                 if car.rect.y >=HEIGHT:
                     car.kill()
-                    c2 = Inimigo(assets['mob_img'],random.randint(1,5))
+                    c2 = Inimigo(assets['mob_img'],car.col)
                     all_sprites.add(c2)
                     
                     inimigos.add(c2)
