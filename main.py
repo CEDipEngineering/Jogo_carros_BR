@@ -130,6 +130,7 @@ def load_assets(img_dir):
     assets['mob_img'] = pygame.image.load(path.join(img_dir, "Blue2.png")).convert()
     assets['background'] = pygame.image.load(path.join(img_dir, 'road.png')).convert()
     assets['riogsul'] = pygame.image.load(path.join(img_dir, 'riogsul.png')).convert()
+    assets['riogsul2'] = pygame.image.load(path.join(img_dir, 'riogsul2.png')).convert()
     
     return assets
 
@@ -214,6 +215,7 @@ def Main():
     try:
         running = game_intro()
 #        load_fase_screen(assets['riogsul'])
+#        load_fase_screen(assets['riogsul2'])
         carregar()
         BossAlive = False
         while running:
