@@ -118,7 +118,7 @@ def load_fase_screen(img, txt1 = ()):
     
 #    txt, txtx, txty = txt1
 #    image = pygame.transform.scale(img, (WIDTH,HEIGHT))
-    image = img.get_rect()
+    image = img
     screen.blit(image,background_rect)
     time.sleep(5)
 
@@ -139,7 +139,6 @@ def Transform_Imgs(assets):
     assets['mob_img'] = pygame.transform.scale(assets['mob_img'], (std_width,95))
     
     return assets
-    
     
 font = pygame.font.SysFont("comicsansms", 72)
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -179,6 +178,7 @@ def Main():
     Shots_Fired = 0
     r_down = False
     l_down = False
+    frame_count = 0
     
     background = assets['background']
     background = pygame.transform.scale(background, (WIDTH, HEIGHT))
@@ -189,8 +189,9 @@ def Main():
     
     try:
         running = game_intro()
-        load_fase_screen(assets['riogsul'])
+#        load_fase_screen(assets['riogsul'])
         carregar()
+        BossAlive = False
         while running:
             if player.HP <= 0:
                 running = game_intro()
@@ -276,7 +277,9 @@ def Main():
                     inimigos.add(m)
                     all_sprites.add(m)
                     
-
+            if BossAlive:
+                b = Bullet(assets['bullet_img'], Boss.rect.centerx, Boss.rect.bottom, 0)
+                Boss.Bossfire(b)
             hit = pygame.sprite.spritecollide(player, inimigos, True, pygame.sprite.collide_circle)            
             if hit:
                 player.HP -= 1
@@ -301,11 +304,18 @@ def Main():
                     car.kill()
                     c2 = Inimigo(assets['mob_img'],random.randint(1,5))
                     all_sprites.add(c2)
-                    hits2 = pygame.sprite.spritecollide(c2,inimigos,False)
                     
                     inimigos.add(c2)
             all_sprites.update()        
-            
+            if frame_count == 60*10:
+                for enemy in inimigos:
+                    enemy.kill()
+                Boss = Inimigo(assets['mob_img'] , 3, boss = True)
+                all_sprites.add(Boss)
+                inimigos.add(Boss)
+                Boss.HP = 10
+                BossAlive = True
+                    
             ##----Background movement----##
             if background_aceleration >= background_maxspeed:
                 background_aceleration = background_maxspeed
@@ -325,7 +335,7 @@ def Main():
             
             # Depois de desenhar tudo, inverte o display.
             pygame.display.flip()
-            
+            frame_count += 1
     finally:
         pygame.quit()
 Main()
