@@ -143,7 +143,7 @@ def Transform_Imgs(assets):
 def highscore(score):
     
     list_score = []
-    list_score.push(score)
+    list_score.append(score)
     high_score = max(list_score)
     if len(list_score) > 5:
         list_score.remove(min(list_score))
