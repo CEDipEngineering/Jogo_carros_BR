@@ -68,27 +68,27 @@ def game_intro():
                     selected = "start"
                     return True
                 elif event.key==pygame.K_ESCAPE:
-                    selected="quit"
+                    selected = "quit"
                     return False 
     
     
     
-        screen.blit(background, background_rect)
-        title=text_format("Road to Victory", font, 50, WHITE)
-        if selected=="start":
-            text_start=text_format("START", font, 75, BLACK)
-            text_start2=text_format("Press right key to start", font, 35, BLACK)
+        screen.blit(background, (WIDTH/2 - WIDTH_STREET/2,0))
+        title = text_format("Road to Victory", font, 50, WHITE)
+        if selected == "start":
+            text_start = text_format("START", font, 75, BLACK)
+            text_start2 = text_format("Press right key to start", font, 35, BLACK)
         else:
             text_start = text_format("START", font, 75, BLACK)
-        if selected=="quit":
-            text_quit=text_format("QUIT", font, 75, WHITE)
+        if selected == "quit":
+            text_quit = text_format("QUIT", font, 75, WHITE)
         else:
             text_quit = text_format("QUIT", font, 75, BLACK)
             text_quit2 = text_format("Press ESC to quit", font, 35, BLACK)
                         
-        title_rect=title.get_rect()
-        start_rect=text_start.get_rect()
-        quit_rect=text_quit.get_rect()
+        title_rect = title.get_rect()
+        start_rect = text_start.get_rect()
+        quit_rect = text_quit.get_rect()
         screen.blit(title, (WIDTH/2 - (title_rect[2]/2), 80))
         screen.blit(text_start, (WIDTH/2 - (start_rect[2]/2), 300))
         screen.blit(text_start2, (WIDTH/2 - (start_rect[2]/2) - 50, 350))
@@ -108,7 +108,7 @@ def carregar():
         i = i - 1
         
      
-        iniciate_rect=text_iniciate.get_rect()
+        iniciate_rect = text_iniciate.get_rect()
         screen.blit(text_iniciate, (WIDTH/2 - (iniciate_rect[2]/2), 300))
         pygame.display.update()
         time.sleep(1)
