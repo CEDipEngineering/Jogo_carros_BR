@@ -191,14 +191,14 @@ inimigos = pygame.sprite.Group()
 tiros = pygame.sprite.Group()
 obstaculos = pygame.sprite.Group()
 
-for i in range(1,6):
+for j in range(1,6):
     dado = random.randint(1,25)
     if dado <= 5:
-        a = Obstaculo(random.choice([assets['obstaculo1_img'],assets['obstaculo2_img']]),i)
+        a = Obstaculo(random.choice([assets['obstaculo1_img'],assets['obstaculo2_img']]),j)
         all_sprites.add(a)
         obstaculos.add(a)
     else:
-        a = Inimigo(assets['mob_img'],i)
+        a = Inimigo(assets['mob_img'],j)
         all_sprites.add(a)
         inimigos.add(a)    
 
