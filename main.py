@@ -185,6 +185,7 @@ background_rect = background.get_rect()
 player = Player(assets['player_img'])
 clock = pygame.time.Clock()
 
+bossshots = pygame.sprite.Group()
 all_sprites = pygame.sprite.Group()            
 inimigos = pygame.sprite.Group()
 tiros = pygame.sprite.Group()
@@ -329,7 +330,7 @@ def Main():
             if BossAlive and frame_count%20 == 0:
                 b = Bullet(assets['bullet_img'], Boss.rect.centerx, Boss.rect.bottom, 0)
                 b.yspeed = 10
-                tiros.add(b)
+                bossshots.add(b)
                 all_sprites.add(b)
                 
             
@@ -343,20 +344,19 @@ def Main():
                 all_sprites.add(player)
                 dado = random.randint(1,25)
                 if dado <= 5:
-                    a = Obstaculo(random.choice([assets['obstaculo1_img'],assets['obstaculo2_img']]),hit.col)
+                    a = Obstaculo(random.choice([assets['obstaculo1_img'],assets['obstaculo2_img']]), hit[0].col)
                     all_sprites.add(a)
                     obstaculos.add(a)
                 else:
-                    a = Inimigo(assets['mob_img'],hit.col)
+                    a = Inimigo(assets['mob_img'],hit[0].col)
                     all_sprites.add(a)
                     inimigos.add(a)   
-#            for mob in inimigos:
-#                hits2 = pygame.sprite.spritecollide(mob,inimigos,False)
-#                if hits2:
-#                    mob.kill()
-#                    m = Inimigo(assets['mob_img'], random.randint(1,5))  
-#                    all_sprites.add(m)
-#                    inimigos.add(m)
+            
+            hit = pygame.sprite.spritecollide(player, bossshots, True, pygame.sprite.collide_circle)            
+            if hit:
+                player.HP -= 1
+                all_sprites.add(player)
+
                 
             hit_obst = pygame.sprite.spritecollide(player, obstaculos, True, pygame.sprite.collide_circle)            
             if hit_obst:
