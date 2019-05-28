@@ -109,9 +109,9 @@ def carregar():
         
      
         iniciate_rect = text_iniciate.get_rect()
-        screen.blit(text_iniciate, (WIDTH/2 - (iniciate_rect[2]/2), 300))
+        screen.blit(text_iniciate, (WIDTH/2 - (iniciate_rect[2]/2), 200))
         pygame.display.update()
-        time.sleep(1)
+        time.sleep(2)
         screen.blit(background, (WIDTH/2 - WIDTH_STREET/2,0))
 
 def load_fase_screen(img):
