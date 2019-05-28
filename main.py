@@ -315,11 +315,11 @@ def Main():
                     dado = random.randint(1,25)
                     i = -1 
                     if dado <= 5:
-                        a = Obstaculo(random.choice([assets['obstaculo1_img'],assets['obstaculo2_img']]),i)
+                        a = Obstaculo(random.choice([assets['obstaculo1_img'],assets['obstaculo2_img']]),hit.col)
                         all_sprites.add(a)
                         obstaculos.add(a)
                     else:
-                        a = Inimigo(assets['mob_img'],i)
+                        a = Inimigo(assets['mob_img'],hit.col)
                         all_sprites.add(a)
                         inimigos.add(a)
                 if hit.boss and hit.HP <= 0:
@@ -341,9 +341,15 @@ def Main():
             if hit:
                 player.HP -= 1
                 all_sprites.add(player)
-                m = Inimigo(assets['mob_img'], random.randint(1,5))  
-                all_sprites.add(m)
-                inimigos.add(m)
+                dado = random.randint(1,25)
+                if dado <= 5:
+                    a = Obstaculo(random.choice([assets['obstaculo1_img'],assets['obstaculo2_img']]),hit.col)
+                    all_sprites.add(a)
+                    obstaculos.add(a)
+                else:
+                    a = Inimigo(assets['mob_img'],hit.col)
+                    all_sprites.add(a)
+                    inimigos.add(a)   
 #            for mob in inimigos:
 #                hits2 = pygame.sprite.spritecollide(mob,inimigos,False)
 #                if hits2:
@@ -368,17 +374,29 @@ def Main():
                 car.updateSpeed(background_aceleration)
                 if car.rect.y >=HEIGHT:
                     car.kill()
-                    c2 = Inimigo(assets['mob_img'],car.col)
-                    all_sprites.add(c2)
-                    inimigos.add(c2)
-                    
+                    dado = random.randint(1,25)
+                    if dado <= 5:
+                        a = Obstaculo(random.choice([assets['obstaculo1_img'],assets['obstaculo2_img']]),car.col)
+                        all_sprites.add(a)
+                        obstaculos.add(a)
+                    else:
+                        a = Inimigo(assets['mob_img'], car.col)
+                        all_sprites.add(a)
+                        inimigos.add(a)   
+                                
             for objeto in obstaculos:
                 objeto.updateSpeed(background_aceleration)
                 if objeto.rect.y >=HEIGHT:
                     objeto.kill()
-                    c2 = Inimigo(assets['mob_img'],car.col)
-                    all_sprites.add(c2)
-                    obstaculos.add(c2)    
+                    dado = random.randint(1,25)
+                    if dado <= 5:
+                        a = Obstaculo(random.choice([assets['obstaculo1_img'],assets['obstaculo2_img']]),i)
+                        all_sprites.add(a)
+                        obstaculos.add(a)
+                    else:
+                        a = Inimigo(assets['mob_img'],i)
+                        all_sprites.add(a)
+                        inimigos.add(a)     
 
             all_sprites.update()        
             if frame_count == 60*10:
