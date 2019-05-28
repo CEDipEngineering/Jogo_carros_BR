@@ -101,7 +101,7 @@ def game_intro():
 def carregar():
     screen.fill(BLACK)
     screen.blit(background, (WIDTH/2 - WIDTH_STREET/2,0))
-    i = 3
+    i =  3
     while i != 0:
         text_iniciate = text_format("{0}".format(i), font, 100, RED)
         
