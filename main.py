@@ -99,13 +99,14 @@ def game_intro():
 #        screen.set_caption("Python - Pygame Simple Main Menu Selection")
         
 def carregar():
+    screen.fill(BLACK)
     screen.blit(background, (WIDTH/2 - WIDTH_STREET/2,0))
     i = 3
     while i != 0:
         text_iniciate = text_format("{0}".format(i), font, 100, RED)
         
      
-        i = i - 1
+        
         
      
         iniciate_rect = text_iniciate.get_rect()
@@ -113,6 +114,7 @@ def carregar():
         pygame.display.update()
         time.sleep(2)
         screen.blit(background, (WIDTH/2 - WIDTH_STREET/2,0))
+        i = i - 1
 
 def load_fase_screen(img):
     
