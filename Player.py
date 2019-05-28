@@ -77,12 +77,12 @@ class Player (pygame.sprite.Sprite):
         self.rect.bottom = self.ypos
         
         #Keep in screen (Crash into walls)
-        if self.xpos >= (WIDTH-WIDTH_STREET)/2 + WIDTH_STREET:
-            self.xpos = (WIDTH-WIDTH_STREET)/2 + WIDTH_STREET
+        if self.xpos >= (WIDTH-WIDTH_STREET)/2 + WIDTH_STREET - self.rect.width:
+            self.xpos = (WIDTH-WIDTH_STREET)/2 + WIDTH_STREET  - self.rect.width
             self.speed = 0
             self.acc = 0
-        if self.xpos <= (WIDTH-WIDTH_STREET)/2:
-            self.xpos = (WIDTH-WIDTH_STREET)/2
+        if self.xpos <= (WIDTH-WIDTH_STREET)/2  - self.rect.width:
+            self.xpos = (WIDTH-WIDTH_STREET)/2  - self.rect.width
             self.speed = 0
             self.acc = 0
             
