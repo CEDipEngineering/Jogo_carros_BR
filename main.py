@@ -34,10 +34,17 @@ RED = consts['RED']
 WHITE = consts['WHITE']
 img_dir = path.join(path.dirname(__file__), 'Assets')
 img_dir = path.join(img_dir,'img')
+snd_dir = path.join(path.dirname(__file__), 'Assets')
+snd_dir = path.join(snd_dir,'snd')
 std_width = int(WIDTH_STREET/10)
 
 
-#carregando a intro do jogo (tela)
+#Carrega os sons do jogo
+
+pygame.mixer.music.load(path.join(snd_dir, 'meowtek.wav'))
+pygame.mixer.music.set_volume(0.4)
+shoot_sound = pygame.mixer.Sound(path.join(snd_dir, 'shot.wav'))
+boom_sound = pygame.mixer.Sound(path.join(snd_dir, 'Boom.wav'))
 
 
  
@@ -55,6 +62,7 @@ def text_format(message,font, textSize, textColor):
 
 def game_intro():
     
+    pygame.mixer.music.play(loops=-1)
     menu=True
     selected="start"
  
@@ -66,9 +74,11 @@ def game_intro():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RIGHT:
                     selected = "start"
+                    pygame.mixer.music.stop()
                     return True
                 elif event.key==pygame.K_ESCAPE:
                     selected = "quit"
+                    pygame.mixer.music.stop()
                     return False 
     
     
@@ -300,6 +310,7 @@ def Main():
                     all_sprites.add(bullet)
                     tiros.add(bullet)
                     Shots_Fired += 1
+                    shoot_sound.play()
                 else:
                     Shots_Fired = 0
                     fired = True
@@ -358,6 +369,7 @@ def Main():
             if hit:
                 player.HP -= 1
                 all_sprites.add(player)
+                boom_sound.play()
 
                 
             hit_obst = pygame.sprite.spritecollide(player, obstaculos, True, pygame.sprite.collide_circle)            
@@ -367,6 +379,7 @@ def Main():
                 o = Obstaculo(random.choice([assets['obstaculo1_img'],assets['obstaculo2_img']]), random.randint(1,5))  
                 all_sprites.add(o)
                 obstaculos.add(o)
+                boom_sound.play()
             
             screen.fill(BLACK)
             
