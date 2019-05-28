@@ -31,7 +31,7 @@ class Obstaculo(pygame.sprite.Sprite):
         self.image = img
         self.image.set_colorkey((0,0,0))
         self.rect = self.image.get_rect()
-        self.radius = int(self.rect.width * 0.35 / 2)
+        self.radius = int(self.rect.width * 0.85 / 2)
         self.speedy = 0
         self.size = size
         self.col = col

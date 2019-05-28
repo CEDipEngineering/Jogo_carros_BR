@@ -37,7 +37,7 @@ class Bullet(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.centerx = self.xpos
         self.rect.bottom = self.ypos
-        
+        self.radius = int(self.rect.width * 0.85 / 2)
         
     def update(self):
         self.rect.x += self.xspeed

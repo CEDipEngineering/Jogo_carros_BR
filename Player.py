@@ -42,6 +42,7 @@ class Player (pygame.sprite.Sprite):
         self.firerate = 20
         self.burstfire = 0
         self.HP = 5
+        self.radius = int(self.rect.width * 0.85 / 2)
         
         #Criando atributos de tanque de gasolina 
         
