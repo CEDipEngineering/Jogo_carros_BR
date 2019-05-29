@@ -44,8 +44,7 @@ std_width = int(WIDTH_STREET/10)
 
 pygame.mixer.music.load(path.join(snd_dir, 'meowtek.wav'))
 pygame.mixer.music.set_volume(0.4)
-shoot_sound = pygame.mixer.Sound(path.join(snd_dir, 'shot.wav'))
-boom_sound = pygame.mixer.Sound(path.join(snd_dir, 'Boom.wav'))
+
 
 
  
@@ -149,6 +148,8 @@ def load_assets(img_dir):
     assets['obstaculo1_img'] = pygame.image.load(path.join(img_dir, 'roadblock.png')).convert_alpha()
     assets['obstaculo2_img'] = pygame.image.load(path.join(img_dir, 'cone.png')).convert_alpha()
     assets['boss_img'] = pygame.image.load(path.join(img_dir, 'Red2.png')).convert_alpha()
+    assets['shoot_sound'] = pygame.mixer.Sound(path.join(snd_dir, 'shot.wav'))
+    assets['boom_sound'] = pygame.mixer.Sound(path.join(snd_dir, 'Boom.wav'))
     
     return assets
 
@@ -196,7 +197,8 @@ assets = Transform_Imgs(assets)
 #carregando o plano de fundo (para tela inicial)
 background = assets['background']
 background_rect = background.get_rect()
-
+shoot_sound = assets['shoot_sound']
+boom_sound = assets['boom_sound'] 
 
 
 
@@ -313,7 +315,7 @@ def Main():
                             if event.key == pygame.K_s:
                                 player.accY += player.power
                             if event.key == pygame.K_ESCAPE:
-                                pygame.quit()
+                                running = False
                             if event.key == pygame.K_LSHIFT:
                                 player.firerate = 0.01
                     
@@ -580,7 +582,7 @@ def Main():
                             if event.key == pygame.K_s:
                                 player.accY += player.power
                             if event.key == pygame.K_ESCAPE:
-                                pygame.quit()
+                                running2 = False
                             if event.key == pygame.K_LSHIFT:
                                 player.firerate = 0.01
                     
@@ -624,6 +626,7 @@ def Main():
                     
                     counter = 0
                     for hit in hits:
+                        boom_sound.play()
                         hit.HP -= 1
                         if hit.HP <= 0 and not hit.boss:
                             dado = random.randint(1,25)
@@ -641,6 +644,7 @@ def Main():
                             
                     hitsobst = pygame.sprite.groupcollide(obstaculos, tiros, True, True)
                     for hit in hitsobst:
+                        boom_sound.play()
                         all_sprites.add(hit)
                         obstaculos.add(hit)
                             
