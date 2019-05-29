@@ -463,7 +463,253 @@ def Main():
                     pygame.display.flip()
                     frame_count += 1
             finally:
-                pygame.quit()
+                running = False
+            
+            
+            
+            
+            ###-----------------------------------------------------------###
+            ###------------------FASE 1 ^ -------------FASE 2 v ----------###
+            ###-----------------------------------------------------------###
+                        
+            
+                
+            
+            
+            try:
+                
+                for j in range(1,6):
+                    dado = random.randint(1,25)
+                    if dado <= 5:
+                        a = Obstaculo(random.choice([assets['obstaculo1_img'],assets['obstaculo2_img']]),j)
+                        all_sprites.add(a)
+                        obstaculos.add(a)
+                    else:
+                        a = Inimigo(assets['mob_img'],j)
+                        all_sprites.add(a)
+                        inimigos.add(a)
+                    
+                running2 = game_intro()
+                load_fase_screen(assets['riogsul'])
+        #        load_fase_screen(assets['riogsul2'])
+                carregar()
+                BossAlive = False
+                BossKilled = False
+                BossTested = True
+                while running2:
+                    if not BossAlive and BossTested:
+                        BossKilled = False
+                    elif BossAlive:
+                        BossKilled = False
+                        BossTested = False
+                    else:
+                        BossKilled = True
+                    
+                    if BossKilled:
+                        running = False
+                    
+                    if player.HP <= 0:
+                        running = game_intro()
+                        if running:
+                            carregar()
+                            for mob in inimigos:
+                                mob.kill()
+                            for i in range(1,6):
+                                a = Inimigo(assets['mob_img'],i)
+                                if a != None:
+                                    all_sprites.add(a)
+                                    inimigos.add(a)
+                            player.HP = 5
+                            
+                    keys = pygame.key.get_pressed()  #checking pressed keys
+                    # Ajusta a velocidade do jogo.
+                    clock.tick(FPS)
+                    
+                    # Processa os eventos (mouse, teclado, botão, etc).
+                    for event in pygame.event.get():
+                        
+                        # Verifica se foi fechado
+                        if event.type == pygame.QUIT:
+                            running2 = False
+                        
+                        if event.type == pygame.KEYDOWN:
+                            if event.key == pygame.K_a:
+                                l_down = True
+                                player.acc -= player.power
+                            if event.key == pygame.K_d:
+                                r_down = True
+                                player.acc += player.power
+                                
+                            if event.key == pygame.K_w:
+                                player.accY -= player.power
+                            if event.key == pygame.K_s:
+                                player.accY += player.power
+                            if event.key == pygame.K_ESCAPE:
+                                pygame.quit()
+                            if event.key == pygame.K_LSHIFT:
+                                player.firerate = 0.01
+                    
+                        if event.type == pygame.KEYUP:
+                            if event.key == pygame.K_a:
+                                l_down = False
+                                player.acc = 0
+                                if r_down:
+                                    player.acc += player.power
+                                   
+                            if event.key == pygame.K_d:
+                                r_down = False
+                                player.acc = 0
+                                if l_down:
+                                    player.acc -= player.power
+                                    
+                            if event.key == pygame.K_w:
+                                player.accY = 0
+                            if event.key == pygame.K_s:
+                                player.accY = 0
+                            if event.key == pygame.K_LSHIFT:
+                                player.firerate = 10
+                                
+                    if keys[pygame.K_SPACE] and not fired:
+                        if Shots_Fired<=player.burstfire:
+                            bullet = Bullet(assets['bullet_img'], player.rect.centerx, player.rect.top, player.speed)
+                            all_sprites.add(bullet)
+                            tiros.add(bullet)
+                            Shots_Fired += 1
+                            shoot_sound.play()
+                        else:
+                            Shots_Fired = 0
+                            fired = True
+                        
+                    if fired:
+                        fired_cooldown += 1
+                    if fired_cooldown >= player.firerate:
+                        fired_cooldown = 0
+                        fired = False
+                    hits = pygame.sprite.groupcollide(inimigos, tiros, False, True)
+                    
+                    counter = 0
+                    for hit in hits:
+                        hit.HP -= 1
+                        if hit.HP <= 0 and not hit.boss:
+                            dado = random.randint(1,25)
+                            i = -1 
+                            if dado <= 5:
+                                a = Obstaculo(random.choice([assets['obstaculo1_img'],assets['obstaculo2_img']]),hit.col)
+                                all_sprites.add(a)
+                                obstaculos.add(a)
+                            else:
+                                a = Inimigo(assets['mob_img'],hit.col)
+                                all_sprites.add(a)
+                                inimigos.add(a)
+                        if hit.boss and hit.HP <= 0:
+                            BossAlive = False
+                            
+                            
+                    if BossAlive and frame_count%20 == 0:
+                        b = Bullet(assets['bullet_img'], Boss.rect.centerx, Boss.rect.bottom, 0)
+                        b.yspeed = 10
+                        bossshots.add(b)
+                        all_sprites.add(b)
+                        
+                    
+                        
+                    score = counter 
+                    highscore(score)
+                    
+                    hit = pygame.sprite.spritecollide(player, inimigos, True, pygame.sprite.collide_circle)            
+                    if hit:
+                        player.HP -= 1
+                        all_sprites.add(player)
+                        dado = random.randint(1,25)
+                        if dado <= 5:
+                            a = Obstaculo(random.choice([assets['obstaculo1_img'],assets['obstaculo2_img']]), hit[0].col)
+                            all_sprites.add(a)
+                            obstaculos.add(a)
+                        else:
+                            a = Inimigo(assets['mob_img'],hit[0].col)
+                            all_sprites.add(a)
+                            inimigos.add(a)   
+                    
+                    hit = pygame.sprite.spritecollide(player, bossshots, True, pygame.sprite.collide_circle)            
+                    if hit:
+                        player.HP -= 1
+                        all_sprites.add(player)
+                        boom_sound.play()
+        
+                        
+                    hit_obst = pygame.sprite.spritecollide(player, obstaculos, True, pygame.sprite.collide_circle)            
+                    if hit_obst:
+                        player.HP -= 1
+                        all_sprites.add(player)
+                        o = Obstaculo(random.choice([assets['obstaculo1_img'],assets['obstaculo2_img']]), random.randint(1,5))  
+                        all_sprites.add(o)
+                        obstaculos.add(o)
+                        boom_sound.play()
+                    
+                    screen.fill(BLACK)
+                    
+                    
+                    
+                    for car in inimigos:
+                        car.updateSpeed(background_aceleration)
+                        if car.rect.y >=HEIGHT:
+                            car.kill()
+                            dado = random.randint(1,25)
+                            if dado <= 5:
+                                a = Obstaculo(random.choice([assets['obstaculo1_img'],assets['obstaculo2_img']]),car.col)
+                                all_sprites.add(a)
+                                obstaculos.add(a)
+                            else:
+                                a = Inimigo(assets['mob_img'], car.col)
+                                all_sprites.add(a)
+                                inimigos.add(a)   
+                                        
+                    for objeto in obstaculos:
+                        objeto.updateSpeed(background_aceleration)
+                        if objeto.rect.y >=HEIGHT:
+                            objeto.kill()
+                            dado = random.randint(1,25)
+                            if dado <= 5:
+                                a = Obstaculo(random.choice([assets['obstaculo1_img'],assets['obstaculo2_img']]), objeto.col)
+                                all_sprites.add(a)
+                                obstaculos.add(a)
+                            else:
+                                a = Inimigo(assets['mob_img'], objeto.col)
+                                all_sprites.add(a)
+                                inimigos.add(a)     
+        
+                    all_sprites.update()        
+                    if frame_count == 60*10:
+                        for enemy in inimigos:
+                            enemy.kill()
+                        Boss = Inimigo(assets['boss_img'] , 3, boss = True)
+                        all_sprites.add(Boss)
+                        inimigos.add(Boss)
+                        Boss.HP = 10
+                        BossAlive = True
+                            
+                    ##----Background movement----##
+                    if background_aceleration >= background_maxspeed:
+                        background_aceleration = background_maxspeed
+                    else:
+                        background_aceleration += 0           
+                    relative_y = background_posY % background.get_rect().height
+                    screen.blit(background, ((WIDTH-WIDTH_STREET)/2,relative_y - background.get_rect().height))
+                    if relative_y < HEIGHT:
+                        screen.blit(background, ((WIDTH-WIDTH_STREET)/2,relative_y))
+                    background_posY += background_aceleration
+                    ##---------------------------##
+                    
+                    
+                    
+                    all_sprites.draw(screen)
+                    
+                    
+                    # Depois de desenhar tudo, inverte o display.
+                    pygame.display.flip()
+                    frame_count += 1
+            finally:
+                running2 = False
     finally:
         pass
             
