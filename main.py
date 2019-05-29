@@ -358,7 +358,11 @@ def Main():
                         if hit.boss and hit.HP <= 0:
                             BossAlive = False
                             
-                            
+                    hitsobst = pygame.sprite.groupcollide(obstaculos, tiros, True, True)
+                    for hit in hitsobst:
+                        all_sprites.add(hit)
+                        obstaculos.add(hit)
+                    
                     if BossAlive and frame_count%20 == 0:
                         b = Bullet(assets['bullet_img'], Boss.rect.centerx, Boss.rect.bottom, 0)
                         b.yspeed = 10
@@ -366,7 +370,7 @@ def Main():
                         all_sprites.add(b)
                         
                     
-                        
+                       
                     score = counter 
                     highscore(score)
                     
@@ -482,10 +486,12 @@ def Main():
                     dado = random.randint(1,25)
                     if dado <= 5:
                         a = Obstaculo(random.choice([assets['obstaculo1_img'],assets['obstaculo2_img']]),j)
+                        a.HP = 2
                         all_sprites.add(a)
                         obstaculos.add(a)
                     else:
                         a = Inimigo(assets['mob_img'],j)
+                        a.HP = 2
                         all_sprites.add(a)
                         inimigos.add(a)
                     
@@ -496,6 +502,7 @@ def Main():
                 BossAlive = False
                 BossKilled = False
                 BossTested = True
+                frame_count = 0
                 while running2:
                     if not BossAlive and BossTested:
                         BossKilled = False
@@ -604,10 +611,14 @@ def Main():
                         if hit.boss and hit.HP <= 0:
                             BossAlive = False
                             
+                    hitsobst = pygame.sprite.groupcollide(obstaculos, tiros, True, True)
+                    for hit in hitsobst:
+                        all_sprites.add(hit)
+                        obstaculos.add(hit)
                             
-                    if BossAlive and frame_count%20 == 0:
+                    if BossAlive and frame_count%15 == 0:
                         b = Bullet(assets['bullet_img'], Boss.rect.centerx, Boss.rect.bottom, 0)
-                        b.yspeed = 10
+                        b.yspeed = 12
                         bossshots.add(b)
                         all_sprites.add(b)
                         
@@ -679,13 +690,13 @@ def Main():
                                 inimigos.add(a)     
         
                     all_sprites.update()        
-                    if frame_count == 60*10:
+                    if frame_count == 60*20:
                         for enemy in inimigos:
                             enemy.kill()
                         Boss = Inimigo(assets['boss_img'] , 3, boss = True)
                         all_sprites.add(Boss)
                         inimigos.add(Boss)
-                        Boss.HP = 10
+                        Boss.HP = 20
                         BossAlive = True
                             
                     ##----Background movement----##
