@@ -265,6 +265,20 @@ def Main():
                     if player.HP <= 0:
                         running = game_intro()
                         if running:
+                            fired = False
+                            fired_cooldown = 0
+                            Shots_Fired = 0
+                            r_down = False
+                            l_down = False
+                            frame_count = 0
+                            game_on = True
+                            background = assets['background']
+                            background_posY = 0
+                            background_aceleration = 10 
+                            background_maxspeed = 7.5
+                            BossAlive = False
+                            BossKilled = False
+                            BossTested = True
                             carregar()
                             for mob in inimigos:
                                 mob.kill()
@@ -518,6 +532,20 @@ def Main():
                     if player.HP <= 0:
                         running = game_intro()
                         if running:
+                            fired = False
+                            fired_cooldown = 0
+                            Shots_Fired = 0
+                            r_down = False
+                            l_down = False
+                            frame_count = 0
+                            game_on = True
+                            background = assets['background']
+                            background_posY = 0
+                            background_aceleration = 10 
+                            background_maxspeed = 7.5
+                            BossAlive = False
+                            BossKilled = False
+                            BossTested = True
                             carregar()
                             for mob in inimigos:
                                 mob.kill()
