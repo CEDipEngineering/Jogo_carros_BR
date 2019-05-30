@@ -634,7 +634,7 @@ def Main():
                     
                     counter = 0
                     for hit in hits:
-                        boom_sound.play()
+                        
                         hit.HP -= 1
                         if hit.HP <= 0 and not hit.boss:
                             dado = random.randint(1,25)
@@ -652,7 +652,7 @@ def Main():
                             
                     hitsobst = pygame.sprite.groupcollide(obstaculos, tiros, True, True)
                     for hit in hitsobst:
-                        boom_sound.play()
+                        
                         all_sprites.add(hit)
                         obstaculos.add(hit)
                             
