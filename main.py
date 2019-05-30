@@ -87,7 +87,7 @@ def game_intro():
     
     
         screen.blit(background, (WIDTH/2 - WIDTH_STREET/2,0))
-        title = text_format("Road to Victory", font, 50, WHITE)
+        title = text_format("Road to Victory", font, 50, BLACK)
         if selected == "start":
             text_start = text_format("START", font, 75, BLACK)
             text_start2 = text_format("Press right key to start", font, 35, BLACK)
