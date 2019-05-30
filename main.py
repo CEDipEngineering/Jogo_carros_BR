@@ -33,6 +33,7 @@ WIDTH_STREET = consts['WIDTH_STREET']
 BLACK = consts['BLACK']
 RED = consts['RED']
 WHITE = consts['WHITE']
+YELLOW = consts['YELLOW']
 img_dir = path.join(path.dirname(__file__), 'Assets')
 img_dir = path.join(img_dir,'img')
 snd_dir = path.join(path.dirname(__file__), 'Assets')
@@ -131,11 +132,14 @@ def carregar():
 
 def load_fase_screen(img):
     
-
+    lit, high = highscore(0)
+    new_high = str(high)
+    total = text_format(new_high, font, 50, YELLOW)
     image = pygame.transform.scale(img, (WIDTH,HEIGHT))
     screen.blit(image, (0,0))
+    screen.blit(total, (375,465))
     pygame.display.update()
-    time.sleep(5)
+    time.sleep(4)
 
 
 def load_assets(img_dir):
@@ -520,6 +524,7 @@ def Main():
                         a.HP = 2
                         all_sprites.add(a)
                         obstaculos.add(a)
+
                     else:
                         a = Inimigo(assets['mob_img'],j)
                         a.HP = 2
