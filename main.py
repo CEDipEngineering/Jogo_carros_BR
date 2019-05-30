@@ -46,7 +46,7 @@ std_width = int(WIDTH_STREET/10)
 
 #Carrega os sons do jogo
 
-pygame.mixer.music.load(path.join(snd_dir, 'meowtek.wav'))
+pygame.mixer.music.load(path.join(snd_dir, 'Automation.mp3'))
 pygame.mixer.music.set_volume(0.4)
 
 
