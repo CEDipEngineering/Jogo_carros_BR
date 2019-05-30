@@ -132,7 +132,14 @@ def carregar():
 
 def load_fase_screen(img):
     
-    lit, high = highscore(0)
+    
+    with open("highscore.txt", "r") as highscore_txt:
+        list_score = json.loads(highscore_txt.read())
+    
+    ass_score = max(list_score)
+    
+    high = highscore(ass_score)
+    
     new_high = str(high)
     total = text_format(new_high, font, 50, YELLOW)
     image = pygame.transform.scale(img, (WIDTH,HEIGHT))
@@ -174,13 +181,25 @@ def Transform_Imgs(assets):
     
 def highscore(score):
     
-    list_score = []
-    list_score.append(score)
-    high_score = max(list_score)
+    
+    with open("highscore.txt", "r") as highscore_txt:
+        list_score = json.loads(highscore_txt.read())
+    
+    if score > max(list_score) or len(list_score) < 5:
+        list_score.append(score)
+        
+    
     if len(list_score) > 5:
         list_score.remove(min(list_score))
+        
+    with open("highscore.txt", "w") as highscore_txt:
+        x = json.dumps(list_score)
+        highscore_txt.write(x)
+        
+    high_score = max(list_score)
+        
     
-    return list_score, high_score   
+    return  high_score   
 
     
     
