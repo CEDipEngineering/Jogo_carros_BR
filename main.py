@@ -691,10 +691,15 @@ def Main():
                         obstaculos.add(hit)
                             
                     if Boss2Alive and frame_count%15 == 0:
-                        b = Bullet(assets['bullet_img'], Boss.rect.centerx, Boss.rect.bottom, 0)
-                        b.yspeed = 12
+                        dadoi = random.randint(0,10)
+                        if dadoi <2:
+                            b = Bullet(assets['big_shot'], Boss.rect.centerx, Boss.rect.bottom, 0)
+                        else:
+                            b = Bullet(assets['bullet_img'], Boss.rect.centerx, Boss.rect.bottom, 0)
+                        b.yspeed = 10
                         bossshots.add(b)
                         all_sprites.add(b)
+                        #
                         
                     
                         
