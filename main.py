@@ -388,7 +388,7 @@ def Main():
                
                     for hit in hits:
                         hit.HP -= 1
-                        counter += 1
+                        counter += 50
                         if hit.HP <= 0 and not hit.boss:
                             dado = random.randint(1,25)
                             i = -1 
@@ -679,7 +679,7 @@ def Main():
                     
                     
                     for hit in hits:
-                        counter += 1
+                        counter += 50
                         hit.HP -= 1
                         if hit.HP <= 0 and not hit.boss:
                             dado = random.randint(1,25)
