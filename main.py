@@ -176,17 +176,19 @@ def Transform_Imgs(assets):
     
 def highscore(score, fase):
     
+    fn = "highscore{0}.txt".format(fase)
     
-    with open("highscore{0}.txt".format(fase), "r") as highscore_txt:
-        list_score = json.loads(highscore_txt.read())
+    with open(fn, "r") as highscore_txt:
+        content = highscore_txt.read()
+        list_score = json.loads(content)
     
     list_score.append(score)
-        
+
     
     if len(list_score) > 5:
         list_score.remove(min(list_score))
         
-    with open("highscore{0}.txt".format(fase), "w") as highscore_txt:
+    with open(fn, "w") as highscore_txt:
         x = json.dumps(list_score)
         highscore_txt.write(x)
         
@@ -379,7 +381,7 @@ def Main():
                         fired = False
                     hits = pygame.sprite.groupcollide(inimigos, tiros, False, True)
                     
-                    counter = 0
+               
                     for hit in hits:
                         hit.HP -= 1
                         counter += 1
@@ -514,7 +516,6 @@ def Main():
                 running = False
                 running2 = False
             
-            
             score = counter 
             highscore(score,1)
             
@@ -556,6 +557,7 @@ def Main():
                 frame_count = 0
                 player.HP = 5
                 counter = 0
+                player.resetFireRate()
                 while running2:
                     if not Boss2Alive and Boss2Tested:
                         Boss2Killed = False
@@ -566,11 +568,11 @@ def Main():
                         Boss2Killed = True
                     
                     if Boss2Killed:
-                        running = False
+                        running2 = False
                     
                     if player.HP <= 0:
-                        running = game_intro()
-                        if running:
+                        running2 = game_intro()
+                        if running2:
                             fired = False
                             fired_cooldown = 0
                             Shots_Fired = 0
