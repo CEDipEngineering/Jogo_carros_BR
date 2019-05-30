@@ -82,6 +82,7 @@ def game_intro():
                 elif event.key==pygame.K_ESCAPE:
                     selected = "quit"
                     pygame.mixer.music.stop()
+                    menu = False
                     return False 
     
     
@@ -154,6 +155,7 @@ def load_assets(img_dir):
     assets['boss_img'] = pygame.image.load(path.join(img_dir, 'Red2.png')).convert_alpha()
     assets['shoot_sound'] = pygame.mixer.Sound(path.join(snd_dir, 'shot.wav'))
     assets['boom_sound'] = pygame.mixer.Sound(path.join(snd_dir, 'Boom.wav'))
+    assets['big_shot'] = pygame.image.load(path.join(img_dir,'bullet_5.png'))
     
     return assets
 
@@ -162,6 +164,7 @@ def Transform_Imgs(assets):
     assets['boss_img'] = pygame.transform.rotate(assets['boss_img'], +90)
     assets['player_img'] = pygame.transform.scale(assets['player_img'], (std_width,95))
     assets['boss_img'] = pygame.transform.scale(assets['boss_img'], (std_width,95))
+    assets['big_shot'] = pygame.transform.scale(assets['big_shot'], (30,60))
     assets['mob_img'] = pygame.transform.scale(assets['mob_img'], (std_width,95))
     assets['obstaculo1_img'] = pygame.transform.scale(assets['obstaculo1_img'], (std_width,95))
     assets['obstaculo2_img'] = pygame.transform.scale(assets['obstaculo2_img'], (std_width,95))
@@ -385,7 +388,11 @@ def Main():
                         obstaculos.add(hit)
                     
                     if BossAlive and frame_count%20 == 0:
-                        b = Bullet(assets['bullet_img'], Boss.rect.centerx, Boss.rect.bottom, 0)
+                        dadoi = random.randint(0,10)
+                        if dadoi <2:
+                            b = Bullet(assets['big_shot'], Boss.rect.centerx, Boss.rect.bottom, 0)
+                        else:
+                            b = Bullet(assets['bullet_img'], Boss.rect.centerx, Boss.rect.bottom, 0)
                         b.yspeed = 10
                         bossshots.add(b)
                         all_sprites.add(b)
@@ -491,6 +498,7 @@ def Main():
                     frame_count += 1
             finally:
                 running = False
+                running2 = False
             
             
             
@@ -569,6 +577,7 @@ def Main():
                                 if a != None:
                                     all_sprites.add(a)
                                     inimigos.add(a)
+                                    a.HP = 2
                             player.HP = 5
                             
                     keys = pygame.key.get_pressed()  #checking pressed keys
@@ -652,6 +661,7 @@ def Main():
                                 a = Inimigo(assets['mob_img'],hit.col)
                                 all_sprites.add(a)
                                 inimigos.add(a)
+                            a.HP = 2
                         if hit.boss and hit.HP <= 0:
                             Boss2Alive = False
                             
@@ -674,6 +684,7 @@ def Main():
                     
                     hit = pygame.sprite.spritecollide(player, inimigos, True, pygame.sprite.collide_circle)            
                     if hit:
+                        boom_sound.play()
                         player.HP -= 1
                         all_sprites.add(player)
                         dado = random.randint(1,25)
@@ -685,7 +696,7 @@ def Main():
                             a = Inimigo(assets['mob_img'],hit[0].col)
                             all_sprites.add(a)
                             inimigos.add(a)   
-                    
+                        a.HP = 2
                     hit = pygame.sprite.spritecollide(player, bossshots, True, pygame.sprite.collide_circle)            
                     if hit:
                         player.HP -= 1
@@ -719,7 +730,7 @@ def Main():
                                 a = Inimigo(assets['mob_img'], car.col)
                                 all_sprites.add(a)
                                 inimigos.add(a)   
-                                        
+                            a.HP = 2             
                     for objeto in obstaculos:
                         objeto.updateSpeed(background_aceleration)
                         if objeto.rect.y >=HEIGHT:
@@ -732,7 +743,8 @@ def Main():
                             else:
                                 a = Inimigo(assets['mob_img'], objeto.col)
                                 all_sprites.add(a)
-                                inimigos.add(a)     
+                                inimigos.add(a)
+                            a.HP = 2
         
                     all_sprites.update()        
                     if frame_count == 60*20:
@@ -768,6 +780,8 @@ def Main():
                     frame_count += 1
             finally:
                 running2 = False
+                running = False
+                game_on = False
     finally:
         pass
             
