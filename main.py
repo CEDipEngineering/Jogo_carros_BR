@@ -38,6 +38,9 @@ img_dir = path.join(path.dirname(__file__), 'Assets')
 img_dir = path.join(img_dir,'img')
 snd_dir = path.join(path.dirname(__file__), 'Assets')
 snd_dir = path.join(snd_dir,'snd')
+fnt_dir = path.join(path.dirname(__file__), 'Assets')
+fnt_dir = path.join(fnt_dir,'fonts')
+
 std_width = int(WIDTH_STREET/10)
 
 
@@ -45,7 +48,6 @@ std_width = int(WIDTH_STREET/10)
 
 pygame.mixer.music.load(path.join(snd_dir, 'meowtek.wav'))
 pygame.mixer.music.set_volume(0.4)
-
 
 
  
@@ -158,6 +160,7 @@ def load_assets(img_dir):
     assets['shoot_sound'] = pygame.mixer.Sound(path.join(snd_dir, 'shot.wav'))
     assets['boom_sound'] = pygame.mixer.Sound(path.join(snd_dir, 'Boom.wav'))
     assets['big_shot'] = pygame.image.load(path.join(img_dir,'bullet_5.png'))
+    assets["score_font"] = pygame.font.Font(path.join(fnt_dir, "life.ttf"), 28)
     
     return assets
 
@@ -215,6 +218,7 @@ font = pygame.font.SysFont("comicsansms", 72)
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 assets = load_assets(img_dir)
 assets = Transform_Imgs(assets)
+score_font = assets['score_font']
 
 #carregando o plano de fundo (para tela inicial)
 background = assets['background']
@@ -508,6 +512,10 @@ def Main():
                     
                     all_sprites.draw(screen)
                     
+                    text_surface = score_font.render(chr(9829) * player.HP, True, RED)
+                    text_rect = text_surface.get_rect()
+                    text_rect.bottomleft = (10, HEIGHT - 10)
+                    screen.blit(text_surface, text_rect)
                     
                     # Depois de desenhar tudo, inverte o display.
                     pygame.display.flip()
@@ -795,6 +803,11 @@ def Main():
                     
                     
                     all_sprites.draw(screen)
+                    
+                    text_surface = score_font.render(chr(9829) * player.HP, True, RED)
+                    text_rect = text_surface.get_rect()
+                    text_rect.bottomleft = (10, HEIGHT - 10)
+                    screen.blit(text_surface, text_rect)
                     
                     
                     # Depois de desenhar tudo, inverte o display.
