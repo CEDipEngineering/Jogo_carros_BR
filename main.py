@@ -517,6 +517,11 @@ def Main():
                     text_rect.bottomleft = (10, HEIGHT - 10)
                     screen.blit(text_surface, text_rect)
                     
+                    text_surface = score_font.render("{:08d}".format(counter), True, YELLOW)
+                    text_rect = text_surface.get_rect()
+                    text_rect.topleft = (10, 10)
+                    screen.blit(text_surface, text_rect)
+                    
                     # Depois de desenhar tudo, inverte o display.
                     pygame.display.flip()
                     frame_count += 1
@@ -803,6 +808,11 @@ def Main():
                     
                     
                     all_sprites.draw(screen)
+                    
+                    text_surface = score_font.render("{:08d}".format(counter), True, YELLOW)
+                    text_rect = text_surface.get_rect()
+                    text_rect.topleft = (10, 10)
+                    screen.blit(text_surface, text_rect)
                     
                     text_surface = score_font.render(chr(9829) * player.HP, True, RED)
                     text_rect = text_surface.get_rect()
