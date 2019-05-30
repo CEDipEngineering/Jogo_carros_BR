@@ -268,6 +268,7 @@ def Main():
     background_posY = 0
     background_aceleration = 10 
     background_maxspeed = 7.5
+    SPECIAL = False
     try:
         while game_on:
             try:
@@ -343,8 +344,9 @@ def Main():
                                 player.accY += player.power
                             if event.key == pygame.K_ESCAPE:
                                 pygame.quit()
-                            if event.key == pygame.K_LSHIFT:
-                                player.firerate = 0.01
+                            if event.key == pygame.K_LSHIFT and not SPECIAL:
+                                SPECIAL = True
+                                SpecialFrames = 0
                                 
                     
                         if event.type == pygame.KEYUP:
@@ -388,7 +390,7 @@ def Main():
                
                     for hit in hits:
                         hit.HP -= 1
-                        counter += 50
+                        counter += 500
                         if hit.HP <= 0 and not hit.boss:
                             dado = random.randint(1,25)
                             i = -1 
@@ -420,7 +422,7 @@ def Main():
                         
                     
                        
-                    
+                
                     
                     hit = pygame.sprite.spritecollide(player, inimigos, True, pygame.sprite.collide_circle)            
                     if hit:
@@ -454,7 +456,12 @@ def Main():
                     
                     screen.fill(BLACK)
                     
-                    
+                    if SPECIAL and SpecialFrames<=300:
+                        player.firerate = 0.01
+                        SpecialFrames +=1
+                    else:
+                        player.resetFireRate()
+                        
                     
                     for car in inimigos:
                         car.updateSpeed(background_aceleration)
@@ -485,7 +492,7 @@ def Main():
                                 inimigos.add(a)     
         
                     all_sprites.update()        
-                    if frame_count == 60*10:
+                    if frame_count == 60*25:
                         for enemy in inimigos:
                             enemy.kill()
                         for obst in obstaculos:
@@ -679,7 +686,7 @@ def Main():
                     
                     
                     for hit in hits:
-                        counter += 50
+                        counter += 500
                         hit.HP -= 1
                         if hit.HP <= 0 and not hit.boss:
                             dado = random.randint(1,25)
