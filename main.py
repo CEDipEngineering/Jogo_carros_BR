@@ -512,7 +512,7 @@ def Main():
                         inimigos.add(a)
                     
                 running2 = game_intro()
-                load_fase_screen(assets['riogsul'])
+                load_fase_screen(assets['riogsul2'])
         #        load_fase_screen(assets['riogsul2'])
                 carregar()
                 BossAlive = False
