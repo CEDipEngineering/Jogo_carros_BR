@@ -315,9 +315,10 @@ def Main():
                             if event.key == pygame.K_s:
                                 player.accY += player.power
                             if event.key == pygame.K_ESCAPE:
-                                running = False
+                                pygame.quit()
                             if event.key == pygame.K_LSHIFT:
                                 player.firerate = 0.01
+                                
                     
                         if event.type == pygame.KEYUP:
                             if event.key == pygame.K_a:
@@ -337,7 +338,7 @@ def Main():
                             if event.key == pygame.K_s:
                                 player.accY = 0
                             if event.key == pygame.K_LSHIFT:
-                                player.firerate = 10
+                                player.resetFireRate()
                                 
                     if keys[pygame.K_SPACE] and not fired:
                         if Shots_Fired<=player.burstfire:
@@ -456,6 +457,8 @@ def Main():
                     if frame_count == 60*10:
                         for enemy in inimigos:
                             enemy.kill()
+                        for obst in obstaculos:
+                            obst.kill()
                         Boss = Inimigo(assets['boss_img'] , 3, boss = True)
                         all_sprites.add(Boss)
                         inimigos.add(Boss)
@@ -497,6 +500,10 @@ def Main():
             
             
             try:
+                for enemy in inimigos:
+                    enemy.kill()
+                for obst in obstaculos:
+                    obst.kill()
                 
                 for j in range(1,6):
                     dado = random.randint(1,25)
@@ -515,20 +522,21 @@ def Main():
                 load_fase_screen(assets['riogsul2'])
         #        load_fase_screen(assets['riogsul2'])
                 carregar()
-                BossAlive = False
-                BossKilled = False
-                BossTested = True
+                Boss2Alive = False
+                Boss2Killed = False
+                Boss2Tested = True
                 frame_count = 0
+                player.HP = 5
                 while running2:
-                    if not BossAlive and BossTested:
-                        BossKilled = False
-                    elif BossAlive:
-                        BossKilled = False
-                        BossTested = False
+                    if not Boss2Alive and Boss2Tested:
+                        Boss2Killed = False
+                    elif Boss2Alive:
+                        Boss2Killed = False
+                        Boss2Tested = False
                     else:
-                        BossKilled = True
+                        Boss2Killed = True
                     
-                    if BossKilled:
+                    if Boss2Killed:
                         running = False
                     
                     if player.HP <= 0:
@@ -545,9 +553,9 @@ def Main():
                             background_posY = 0
                             background_aceleration = 10 
                             background_maxspeed = 7.5
-                            BossAlive = False
-                            BossKilled = False
-                            BossTested = True
+                            Boss2Alive = False
+                            Boss2Killed = False
+                            Boss2Tested = True
                             carregar()
                             for mob in inimigos:
                                 mob.kill()
@@ -582,7 +590,7 @@ def Main():
                             if event.key == pygame.K_s:
                                 player.accY += player.power
                             if event.key == pygame.K_ESCAPE:
-                                running2 = False
+                                pygame.quit()
                             if event.key == pygame.K_LSHIFT:
                                 player.firerate = 0.01
                     
@@ -604,7 +612,7 @@ def Main():
                             if event.key == pygame.K_s:
                                 player.accY = 0
                             if event.key == pygame.K_LSHIFT:
-                                player.firerate = 10
+                                player.resetFireRate()
                                 
                     if keys[pygame.K_SPACE] and not fired:
                         if Shots_Fired<=player.burstfire:
@@ -640,7 +648,7 @@ def Main():
                                 all_sprites.add(a)
                                 inimigos.add(a)
                         if hit.boss and hit.HP <= 0:
-                            BossAlive = False
+                            Boss2Alive = False
                             
                     hitsobst = pygame.sprite.groupcollide(obstaculos, tiros, True, True)
                     for hit in hitsobst:
@@ -648,7 +656,7 @@ def Main():
                         all_sprites.add(hit)
                         obstaculos.add(hit)
                             
-                    if BossAlive and frame_count%15 == 0:
+                    if Boss2Alive and frame_count%15 == 0:
                         b = Bullet(assets['bullet_img'], Boss.rect.centerx, Boss.rect.bottom, 0)
                         b.yspeed = 12
                         bossshots.add(b)
@@ -725,11 +733,13 @@ def Main():
                     if frame_count == 60*20:
                         for enemy in inimigos:
                             enemy.kill()
+                        for obst in obstaculos:
+                            obst.kill()
                         Boss = Inimigo(assets['boss_img'] , 3, boss = True)
                         all_sprites.add(Boss)
                         inimigos.add(Boss)
                         Boss.HP = 20
-                        BossAlive = True
+                        Boss2Alive = True
                             
                     ##----Background movement----##
                     if background_aceleration >= background_maxspeed:

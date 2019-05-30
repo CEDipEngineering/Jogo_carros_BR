@@ -60,7 +60,7 @@ class Player (pygame.sprite.Sprite):
             if self.speed > 0:
                 self.speed = self.SpeedLimit
             else:
-                self.speed = -self.SpeedLimit
+                self.speed = - self.SpeedLimit
                 
         if abs(self.speedY) <= self.SpeedLimit:
             self.speedY += self.accY
@@ -68,7 +68,7 @@ class Player (pygame.sprite.Sprite):
             if self.speedY > 0:
                 self.speedY = self.SpeedLimit
             else:
-                self.speedY = -self.SpeedLimit
+                self.speedY = - self.SpeedLimit
         
         self.xpos += self.speed
         self.ypos += self.speedY
@@ -82,8 +82,8 @@ class Player (pygame.sprite.Sprite):
             self.xpos = (WIDTH-WIDTH_STREET)/2 + WIDTH_STREET  - self.rect.width
             self.speed = 0
             self.acc = 0
-        if self.xpos <= (WIDTH-WIDTH_STREET)/2  - self.rect.width:
-            self.xpos = (WIDTH-WIDTH_STREET)/2  - self.rect.width
+        if self.xpos <= (WIDTH-WIDTH_STREET)/2  + self.rect.width:
+            self.xpos = (WIDTH-WIDTH_STREET)/2  + self.rect.width
             self.speed = 0
             self.acc = 0
             
@@ -96,3 +96,5 @@ class Player (pygame.sprite.Sprite):
             self.ypos = HEIGHT - self.size
             self.speedY = 0
             self.accY = 0
+    def resetFireRate(self):
+        self.firerate = 20
