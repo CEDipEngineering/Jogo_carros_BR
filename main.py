@@ -118,11 +118,6 @@ def carregar():
     i =  3
     while i != 0:
         text_iniciate = text_format("{0}".format(i), font, 100, RED)
-        
-     
-        
-        
-     
         iniciate_rect = text_iniciate.get_rect()
         screen.blit(text_iniciate, (WIDTH/2 - (iniciate_rect[2]/2), 200))
         pygame.display.update()
@@ -130,15 +125,15 @@ def carregar():
         screen.blit(background, (WIDTH/2 - WIDTH_STREET/2,0))
         i = i - 1
 
-def load_fase_screen(img):
+def load_fase_screen(img, fase):
     
     
-    with open("highscore.txt", "r") as highscore_txt:
+    with open("highscore{0}.txt".format(fase), "r") as highscore_txt:
         list_score = json.loads(highscore_txt.read())
     
     ass_score = max(list_score)
     
-    high = highscore(ass_score)
+    high = highscore(ass_score, fase)
     
     new_high = str(high)
     total = text_format(new_high, font, 50, YELLOW)
@@ -179,20 +174,19 @@ def Transform_Imgs(assets):
     
     return assets
     
-def highscore(score):
+def highscore(score, fase):
     
     
-    with open("highscore.txt", "r") as highscore_txt:
+    with open("highscore{0}.txt".format(fase), "r") as highscore_txt:
         list_score = json.loads(highscore_txt.read())
     
-    if score > max(list_score) or len(list_score) < 5:
-        list_score.append(score)
+    list_score.append(score)
         
     
     if len(list_score) > 5:
         list_score.remove(min(list_score))
         
-    with open("highscore.txt", "w") as highscore_txt:
+    with open("highscore{0}.txt".format(fase), "w") as highscore_txt:
         x = json.dumps(list_score)
         highscore_txt.write(x)
         
@@ -272,12 +266,13 @@ def Main():
         while game_on:
             try:
                 running = game_intro()
-                load_fase_screen(assets['riogsul'])
+                load_fase_screen(assets['riogsul'],1)
         #        load_fase_screen(assets['riogsul2'])
                 carregar()
                 BossAlive = False
                 BossKilled = False
                 BossTested = True
+                counter = 0
                 while running:
                     if not BossAlive and BossTested:
                         BossKilled = False
@@ -387,6 +382,7 @@ def Main():
                     counter = 0
                     for hit in hits:
                         hit.HP -= 1
+                        counter += 1
                         if hit.HP <= 0 and not hit.boss:
                             dado = random.randint(1,25)
                             i = -1 
@@ -418,8 +414,7 @@ def Main():
                         
                     
                        
-                    score = counter 
-                    highscore(score)
+                    
                     
                     hit = pygame.sprite.spritecollide(player, inimigos, True, pygame.sprite.collide_circle)            
                     if hit:
@@ -520,7 +515,8 @@ def Main():
                 running2 = False
             
             
-            
+            score = counter 
+            highscore(score,1)
             
             ###-----------------------------------------------------------###
             ###------------------FASE 1 ^ -------------FASE 2 v ----------###
@@ -551,7 +547,7 @@ def Main():
                         inimigos.add(a)
                     
                 running2 = game_intro()
-                load_fase_screen(assets['riogsul2'])
+                load_fase_screen(assets['riogsul2'],2)
         #        load_fase_screen(assets['riogsul2'])
                 carregar()
                 Boss2Alive = False
@@ -559,6 +555,7 @@ def Main():
                 Boss2Tested = True
                 frame_count = 0
                 player.HP = 5
+                counter = 0
                 while running2:
                     if not Boss2Alive and Boss2Tested:
                         Boss2Killed = False
@@ -665,9 +662,9 @@ def Main():
                         fired = False
                     hits = pygame.sprite.groupcollide(inimigos, tiros, False, True)
                     
-                    counter = 0
+                    
                     for hit in hits:
-                        
+                        counter += 1
                         hit.HP -= 1
                         if hit.HP <= 0 and not hit.boss:
                             dado = random.randint(1,25)
@@ -703,8 +700,7 @@ def Main():
                         
                     
                         
-                    score = counter 
-                    highscore(score)
+                    
                     
                     hit = pygame.sprite.spritecollide(player, inimigos, True, pygame.sprite.collide_circle)            
                     if hit:
@@ -806,6 +802,10 @@ def Main():
                 running2 = False
                 running = False
                 game_on = False
+                
+            
+            score = counter 
+            highscore(score)
     finally:
         pass
             
