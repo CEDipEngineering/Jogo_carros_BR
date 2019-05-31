@@ -19,40 +19,59 @@ BLACK = consts['BLACK']
 RED = consts['RED']
 
 
+## PLAYER CLASS
 class Player (pygame.sprite.Sprite):
     
     def __init__(self, img):
         
+        ## MAIN CONSTRUCTOR
         pygame.sprite.Sprite.__init__(self)
         
         self.image = img
+        
         self.rect = self.image.get_rect()
+        
         self.image.set_colorkey((0,0,0))
+        
         self.size = 15
+        
+        ## PROPERTIES RELATED TO SPEED AND ACCELERATION 
         self.acc = 0
+        
         self.accY = 0
+        
         self.speed = 0
+        
         self.speedY = 0
+        
         self.power = 0.5
+        
         self.SpeedLimit = 4
+        
+        ## DEFINING PLAYER STARTING POSTION
         self.xpos = WIDTH / 2
+        
         self.rect.centerx = self.xpos
+        
         self.ypos = HEIGHT - self.size
+        
         self.rect.bottom = self.ypos
+        
+        ## PLAYER FIRERATE
         self.firerate = 20
+        
         self.burstfire = 0
+        
+        ## PLAYER LIFE
         self.HP = 5
+        
+        ## COLISION RADIUS
         self.radius = int(self.rect.width * 0.85 / 2)
-        
-        #Criando atributos de tanque de gasolina 
-        
-#        espaco_tanque = 0
-#        gasolina = [0, 10, 20, 30, 40, 50, 60, 70, 80, 100]
-        
+            
 
         
     def update(self):
-        # Physics
+        ## PHYSICS
         
         if abs(self.speed) <= self.SpeedLimit:
             self.speed += self.acc
@@ -73,11 +92,11 @@ class Player (pygame.sprite.Sprite):
         self.xpos += self.speed
         self.ypos += self.speedY
         
-        # Position
+        ## POSITION
         self.rect.centerx = self.xpos
         self.rect.bottom = self.ypos
         
-        #Keep in screen (Crash into walls)
+        ## KEEP IN SCREEN (CRASH INTO WALLS)
         if self.xpos >= (WIDTH-WIDTH_STREET)/2 + WIDTH_STREET - self.rect.width:
             self.xpos = (WIDTH-WIDTH_STREET)/2 + WIDTH_STREET  - self.rect.width
             self.speed = 0
@@ -87,7 +106,7 @@ class Player (pygame.sprite.Sprite):
             self.speed = 0
             self.acc = 0
             
-        #Keep in the bottom area
+        ## KEEP IN THE BOTTOM AREA
         if self.ypos <= HEIGHT - 200:
             self.ypos = HEIGHT - 200
             self.speedY = 0
@@ -96,5 +115,6 @@ class Player (pygame.sprite.Sprite):
             self.ypos = HEIGHT - self.size
             self.speedY = 0
             self.accY = 0
+    
     def resetFireRate(self):
         self.firerate = 20
