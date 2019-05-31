@@ -45,7 +45,7 @@ std_width = int(WIDTH_STREET/10)
 #Carrega os sons do jogo
 
 pygame.mixer.music.load(path.join(snd_dir, 'Automation.mp3'))
-pygame.mixer.music.set_volume(0.4)
+pygame.mixer.music.set_volume(0.8)
 
 
  
@@ -155,6 +155,7 @@ def load_assets(img_dir):
     assets['big_shot'] = pygame.image.load(path.join(img_dir,'bullet_5.png'))
     assets["score_font"] = pygame.font.Font(path.join(fnt_dir, "life.ttf"), 28)
     assets["game_over"] =  pygame.image.load(path.join(img_dir, "game_over.png")).convert_alpha()
+    assets["victory"] =  pygame.image.load(path.join(img_dir, "victory.png")).convert_alpha()
     
     return assets
 
@@ -169,6 +170,8 @@ def Transform_Imgs(assets):
     assets['obstaculo1_img'] = pygame.transform.scale(assets['obstaculo1_img'], (std_width,95))
     assets['obstaculo2_img'] = pygame.transform.scale(assets['obstaculo2_img'], (std_width,95))
     assets['background'] = pygame.transform.scale(assets['background'], (WIDTH_STREET, HEIGHT))
+    assets['game_over'] = pygame.transform.scale(assets['game_over'], (WIDTH, HEIGHT))
+    assets['victory'] = pygame.transform.scale(assets['victory'], (WIDTH, HEIGHT))
     
     return assets
     
@@ -220,6 +223,7 @@ background = assets['background']
 background_rect = background.get_rect()
 shoot_sound = assets['shoot_sound']
 boom_sound = assets['boom_sound'] 
+shoot_sound.set_volume(0.2)
 
 
 
