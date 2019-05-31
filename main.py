@@ -79,7 +79,6 @@ def game_intro():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RIGHT:
                     selected = "start"
-                    pygame.mixer.music.stop()
                     return True
                 elif event.key==pygame.K_ESCAPE:
                     selected = "quit"
@@ -569,7 +568,10 @@ def Main():
                 running2 = game_intro()
                 load_fase_screen(assets['riogsul2'],2)
         #        load_fase_screen(assets['riogsul2'])
-                carregar()
+                while framecount<FPS*3:      
+                    carregar(framecount)
+                    framecount+=1
+                    clock.tick(FPS)
                 Boss2Alive = False
                 Boss2Killed = False
                 Boss2Tested = True
@@ -577,6 +579,7 @@ def Main():
                 player.HP = 5
                 counter = 0
                 player.resetFireRate()
+                SPECIAL = False
                 while running2:
                     if not Boss2Alive and Boss2Tested:
                         Boss2Killed = False
@@ -640,8 +643,9 @@ def Main():
                                 player.accY -= player.power
                             if event.key == pygame.K_s:
                                 player.accY += player.power
-                            if event.key == pygame.K_LSHIFT:
-                                player.firerate = 0.01
+                            if event.key == pygame.K_LSHIFT and not SPECIAL:
+                                SPECIAL = True
+                                SpecialFrames = 0
                     
                         if event.type == pygame.KEYUP:
                             if event.key == pygame.K_a:
@@ -754,7 +758,11 @@ def Main():
                     
                     screen.fill(BLACK)
                     
-                    
+                    if SPECIAL and SpecialFrames<=300:
+                        player.firerate = 0.01
+                        SpecialFrames +=1
+                    else:
+                        player.resetFireRate()
                     
                     for car in inimigos:
                         car.updateSpeed(background_aceleration)
