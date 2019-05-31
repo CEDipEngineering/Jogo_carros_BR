@@ -33,7 +33,7 @@ class Inimigo(pygame.sprite.Sprite):
         self.radius = int(self.rect.width * 0.85 / 2)
         self.speedy = 0
         self.boss = boss
-        self.speedx = 0
+        self.speedx = 5
         self.size = size
         self.col = col
         self.rect.centerx = ((WIDTH-WIDTH_STREET)/2) + (col * WIDTH_STREET/5 - self.rect.width)
