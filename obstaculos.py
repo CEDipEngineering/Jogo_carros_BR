@@ -5,15 +5,18 @@ Created on Fri May 24 07:56:09 2019
 
 @author: joaopedrochacon
 """
+# IMPORTS
 
 import pygame
 import random
 import json
 
+## READING A JSON FILE FOR CONSTANTS 
 with open('consts.txt', 'r') as consts_txt:
     conteudo = consts_txt.read()
     consts = json.loads(conteudo)
 
+## DEFINING CONSTANTS FROM JSON FILE   
 FPS = consts['FPS']
 HEIGHT = consts['HEIGHT']
 WIDTH = consts['WIDTH']
@@ -21,17 +24,17 @@ WIDTH_STREET = consts['WIDTH_STREET']
 BLACK = consts['BLACK']
 RED = consts['RED']
 
-
+## CLASS FOR OBSTACLES IN THE GAME 
 class Obstaculo(pygame.sprite.Sprite):
     
-    # Construtor da classe.
+    ## CLASS CONSTRUCTOR
     def __init__(self, img, col = 1, size = 15):
         pygame.sprite.Sprite.__init__(self)
         
         self.image = img
         self.image.set_colorkey((0,0,0))
         self.rect = self.image.get_rect()
-        self.radius = int(self.rect.width * 0.85 / 2)
+        self.radius = int(self.rect.width * 0.85 / 2) ## RADIUS FROM THE OBJECTS (TO IMPLEMENT COLISION)
         self.speedy = 0
         self.size = size
         self.col = col
