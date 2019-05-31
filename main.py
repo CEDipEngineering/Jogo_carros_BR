@@ -8,7 +8,6 @@ import pygame
 from os import path
 import json
 import random
-import time
 from inimigos import Inimigo
 from obstaculos import Obstaculo
 from bullet import Bullet       
@@ -63,44 +62,23 @@ def text_format(message,font, textSize, textColor):
 
 #carregando a intro do jogo (tela)
 
-def game_intro():
+def game_intro(stage, passtype = 'wait'):
     
     pygame.init()
     pygame.mixer.init()
     pygame.mixer.music.play(loops=-1)
+    stages = {'beginfase1': assets['beginfase1'], 
+              'beginfase2': assets['beginfase2'], 
+              'end': assets['victory'],
+              'game_over': assets['game_over']}
     menu=True
-    selected="start"
- 
-    while menu:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                quit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RIGHT:
-                    selected = "start"
-                    return True
-                elif event.key==pygame.K_ESCAPE:
-                    selected = "quit"
-                    pygame.mixer.music.stop()
-                    menu = False
-                    return False 
-    
-    
-    
+    if stage not in stages:
         screen.blit(background, (WIDTH/2 - WIDTH_STREET/2,0))
-        title = text_format("Road to Victory", font, 50, BLACK)
-        if selected == "start":
-            text_start = text_format("START", font, 75, BLACK)
-            text_start2 = text_format("Press right key to start", font, 35, BLACK)
-        else:
-            text_start = text_format("START", font, 75, BLACK)
-        if selected == "quit":
-            text_quit = text_format("QUIT", font, 75, WHITE)
-        else:
-            text_quit = text_format("QUIT", font, 75, BLACK)
-            text_quit2 = text_format("Close screen to quit", font, 35, BLACK)
-                        
+        title = text_format("Road to Victory", font, 70, BLACK)
+        text_start2 = text_format("Press right key to start", font, 35, BLACK)
+        text_start = text_format("START", font, 75, BLACK)
+        text_quit = text_format("QUIT", font, 75, BLACK)
+        text_quit2 = text_format("Close screen to quit", font, 35, BLACK)
         title_rect = title.get_rect()
         start_rect = text_start.get_rect()
         quit_rect = text_quit.get_rect()
@@ -111,16 +89,55 @@ def game_intro():
         screen.blit(text_quit2, (WIDTH/2 - (quit_rect[2]/2) - 40, 450))
         pygame.display.update()
         clock.tick(FPS)
-#        screen.set_caption("Python - Pygame Simple Main Menu Selection")
+        while menu:
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RIGHT:
+                        return True
+                    elif event.key==pygame.K_ESCAPE:
+                        return False 
+            
         
-def carregar(time):
-    if time % FPS == 0 and time != FPS*3:
+    elif passtype == 'wait':
+        screen.blit(stages[stage], (0,0))
+        pygame.display.update()
+        clock.tick(FPS)
+        time_elapsed = pygame.time.get_ticks() + 5000
+        time2 = pygame.time.get_ticks()
+        while time2 < time_elapsed:
+            time2 = pygame.time.get_ticks()
+        return True
+    
+    elif passtype == 'key':
+        screen.blit(stages[stage], (0,0))
+        pygame.display.update()
+        clock.tick(FPS)
+        while menu:
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RIGHT:
+                        return True
+                    elif event.key==pygame.K_ESCAPE:
+                        return False 
+        
+        
+def carregar():
         screen.fill(BLACK)
         screen.blit(background, (WIDTH/2 - WIDTH_STREET/2,0))
-        text_iniciate = text_format("{0}".format(int((FPS*3-time)/FPS)), font, 100, RED)
-        iniciate_rect = text_iniciate.get_rect()
-        screen.blit(text_iniciate, (WIDTH/2 - (iniciate_rect[2]/2), 200))
-        pygame.display.update()
+        time_elapsed = pygame.time.get_ticks() + 3000
+        time2 = pygame.time.get_ticks()
+        while time2 < time_elapsed:
+            time2 = pygame.time.get_ticks()
+            screen.blit(background, (WIDTH/2 - WIDTH_STREET/2,0))
+            text_iniciate = text_format(str(1 + int((time_elapsed-time2)/1000)), font, 100, RED)
+            iniciate_rect = text_iniciate.get_rect()
+            screen.blit(text_iniciate, (WIDTH/2 - (iniciate_rect[2]/2), 200))
+            pygame.display.update()
+        
+        pass
+        
+        
+        
 
 def load_fase_screen(img, fase):
     
@@ -134,11 +151,15 @@ def load_fase_screen(img, fase):
     
     new_high = str(high)
     total = text_format(new_high, font, 50, YELLOW)
-    image = pygame.transform.scale(img, (WIDTH,HEIGHT))
-    screen.blit(image, (0,0))
+    screen.blit(img, (0,0))
     screen.blit(total, (375,465))
     pygame.display.update()
-    time.sleep(4)
+    time_elapsed = pygame.time.get_ticks() + 1000
+    time4 = pygame.time.get_ticks()
+    while time4 < time_elapsed:
+        time4 = pygame.time.get_ticks()
+    pass
+    
 
 
 def load_assets(img_dir):
@@ -158,6 +179,8 @@ def load_assets(img_dir):
     assets["score_font"] = pygame.font.Font(path.join(fnt_dir, "life.ttf"), 28)
     assets["game_over"] =  pygame.image.load(path.join(img_dir, "game_over.png")).convert_alpha()
     assets["victory"] =  pygame.image.load(path.join(img_dir, "victory.png")).convert_alpha()
+    assets['beginfase1'] = pygame.image.load(path.join(img_dir,"BeginFase1.png")).convert()
+    assets['beginfase2'] = pygame.image.load(path.join(img_dir,"BeginFase2.png")).convert()
     
     return assets
 
@@ -168,12 +191,16 @@ def Transform_Imgs(assets):
     assets['boss_img'] = pygame.transform.scale(assets['boss_img'], (std_width,95))
     assets['big_shot'] = pygame.transform.scale(assets['big_shot'], (30,60))
     assets['big_shot'] = pygame.transform.rotate(assets['big_shot'], +180)
+    assets['riogsul'] = pygame.transform.scale(assets['riogsul'], (WIDTH, HEIGHT))
+    assets['riogsul2'] = pygame.transform.scale(assets['riogsul2'], (WIDTH, HEIGHT))
     assets['mob_img'] = pygame.transform.scale(assets['mob_img'], (std_width,95))
     assets['obstaculo1_img'] = pygame.transform.scale(assets['obstaculo1_img'], (std_width,95))
     assets['obstaculo2_img'] = pygame.transform.scale(assets['obstaculo2_img'], (std_width,95))
     assets['background'] = pygame.transform.scale(assets['background'], (WIDTH_STREET, HEIGHT))
     assets['game_over'] = pygame.transform.scale(assets['game_over'], (WIDTH, HEIGHT))
     assets['victory'] = pygame.transform.scale(assets['victory'], (WIDTH, HEIGHT))
+    assets['beginfase1'] = pygame.transform.scale(assets['beginfase1'], (WIDTH, HEIGHT))
+    assets['beginfase2'] = pygame.transform.scale(assets['beginfase2'], (WIDTH, HEIGHT))
     
     return assets
     
@@ -264,7 +291,7 @@ def Main():
     r_down = False
     l_down = False
     frame_count = 0
-    game_on = True
+    game_on = game_intro(0)
     background = assets['background']
     background_posY = 0
     background_aceleration = 10 
@@ -273,14 +300,9 @@ def Main():
     try:
         while game_on:
             try:
-                running = game_intro()
+                running = game_intro('beginfase1', passtype = 'key')
                 load_fase_screen(assets['riogsul'],1)
-        #        load_fase_screen(assets['riogsul2'])
-                framecount = 0    
-                while framecount<FPS*3:      
-                    carregar(framecount)
-                    framecount+=1
-                    clock.tick(FPS)
+                carregar()
                 BossAlive = False
                 BossKilled = False
                 BossTested = True
@@ -577,13 +599,9 @@ def Main():
                         all_sprites.add(a)
                         inimigos.add(a)
                     
-                running2 = game_intro()
+                running2 = game_intro('beginfase2', passtype = 'key')
                 load_fase_screen(assets['riogsul2'],2)
-        #        load_fase_screen(assets['riogsul2'])
-                while framecount<FPS*3:      
-                    carregar(framecount)
-                    framecount+=1
-                    clock.tick(FPS)
+                carregar()
                 Boss2Alive = False
                 Boss2Killed = False
                 Boss2Tested = True
