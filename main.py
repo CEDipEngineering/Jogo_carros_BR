@@ -166,6 +166,7 @@ def Transform_Imgs(assets):
     assets['player_img'] = pygame.transform.scale(assets['player_img'], (std_width,95))
     assets['boss_img'] = pygame.transform.scale(assets['boss_img'], (std_width,95))
     assets['big_shot'] = pygame.transform.scale(assets['big_shot'], (30,60))
+    assets['big_shot'] = pygame.transform.rotate(assets['big_shot'], +180)
     assets['mob_img'] = pygame.transform.scale(assets['mob_img'], (std_width,95))
     assets['obstaculo1_img'] = pygame.transform.scale(assets['obstaculo1_img'], (std_width,95))
     assets['obstaculo2_img'] = pygame.transform.scale(assets['obstaculo2_img'], (std_width,95))
