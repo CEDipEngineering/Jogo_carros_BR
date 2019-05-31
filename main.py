@@ -22,9 +22,7 @@ with open('consts.txt', 'r') as consts_txt:
     conteudo = consts_txt.read()
     consts = json.loads(conteudo)
     
-with open('dic_tanque.txt', 'r') as dic_tanque_txt:
-    conteudo = dic_tanque_txt.read()
-    tanque = json.loads(conteudo)
+
 
 FPS = consts['FPS']
 HEIGHT = consts['HEIGHT']
