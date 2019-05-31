@@ -161,6 +161,7 @@ def load_assets(img_dir):
     assets['boom_sound'] = pygame.mixer.Sound(path.join(snd_dir, 'Boom.wav'))
     assets['big_shot'] = pygame.image.load(path.join(img_dir,'bullet_5.png'))
     assets["score_font"] = pygame.font.Font(path.join(fnt_dir, "life.ttf"), 28)
+    assets["game_over"] = pygame.font.Font(path.join(fnt_dir, "game_over.png"))
     
     return assets
 
