@@ -22,9 +22,6 @@ with open('consts.txt', 'r') as consts_txt:
     conteudo = consts_txt.read()
     consts = json.loads(conteudo)
     
-with open('dic_tanque.txt', 'r') as dic_tanque_txt:
-    conteudo = dic_tanque_txt.read()
-    tanque = json.loads(conteudo)
 
 FPS = consts['FPS']
 HEIGHT = consts['HEIGHT']
@@ -34,6 +31,9 @@ BLACK = consts['BLACK']
 RED = consts['RED']
 WHITE = consts['WHITE']
 YELLOW = consts['YELLOW']
+GREEN = consts['GREEN']
+NEON_BLUE = consts['NEON_BLUE']
+
 img_dir = path.join(path.dirname(__file__), 'Assets')
 img_dir = path.join(img_dir,'img')
 snd_dir = path.join(path.dirname(__file__), 'Assets')
@@ -528,6 +528,13 @@ def Main():
                     text_rect.topleft = (10, 10)
                     screen.blit(text_surface, text_rect)
                     
+                    if BossAlive:
+                        text_surface = score_font.render(chr(9829) * int(Boss.HP/2), True, NEON_BLUE)
+                        text_rect = text_surface.get_rect()
+                        text_rect.bottomleft = ((WIDTH-WIDTH_STREET)/2 + WIDTH_STREET +10, HEIGHT - 10)
+                        screen.blit(text_surface, text_rect)
+                    
+                    
                     # Depois de desenhar tudo, inverte o display.
                     pygame.display.flip()
                     frame_count += 1
@@ -832,7 +839,12 @@ def Main():
                     text_rect.bottomleft = (10, HEIGHT - 10)
                     screen.blit(text_surface, text_rect)
                     
-                    
+                    if Boss2Alive:
+                        text_surface = score_font.render(chr(9829) * int(Boss.HP/2), True, NEON_BLUE)
+                        text_rect = text_surface.get_rect()
+                        text_rect.bottomleft = ((WIDTH-WIDTH_STREET)/2 + WIDTH_STREET +10, HEIGHT - 10)
+                        screen.blit(text_surface, text_rect)
+                        
                     # Depois de desenhar tudo, inverte o display.
                     pygame.display.flip()
                     frame_count += 1
