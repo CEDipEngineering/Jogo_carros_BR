@@ -69,7 +69,7 @@ def game_intro(stage, passtype = 'wait'):
     pygame.mixer.music.play(loops=-1)
     stages = {'beginfase1': assets['beginfase1'], 
               'beginfase2': assets['beginfase2'], 
-              'end': assets['victory'],
+              'victory': assets['victory'],
               'game_over': assets['game_over']}
     menu=True
     if stage not in stages:
@@ -320,7 +320,8 @@ def Main():
                         running = False
                     
                     if player.HP <= 0:
-                        running = game_intro()
+                        game_intro('game_over', passtype = 'key')
+                        running = game_intro('beginfase1', passtype = 'key')
                         if running:
                             fired = False
                             fired_cooldown = 0
@@ -623,7 +624,9 @@ def Main():
                         running2 = False
                     
                     if player.HP <= 0:
-                        running2 = game_intro()
+                        
+                        game_intro('game_over', passtype = 'key')
+                        running2 = game_intro('beginfase2', passtype = 'key')
                         if running2:
                             fired = False
                             fired_cooldown = 0
@@ -878,6 +881,8 @@ def Main():
             
             score = counter 
             highscore(score, 2)
+            
+            game_intro('victory', passtype = 'key'):
     finally:
         pass
             
