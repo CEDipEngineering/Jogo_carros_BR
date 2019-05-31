@@ -42,24 +42,25 @@ class Inimigo(pygame.sprite.Sprite):
         ## BOOLEAN FOR WHETHER ENEMY IS BOSS OR NOT
         self.boss = boss
         
-        self.speedx = 5
-        
         self.size = size
         
         self.col = col
         
         self.rect.centerx = ((WIDTH-WIDTH_STREET)/2) + (col * WIDTH_STREET/5 - self.rect.width)
-        
+        ## STARTS ENEMIES ABOVE SCREEN
         self.rect.top = random.randint(-300,-100)
-        
+        ## DEFAULTS TO 1 HIT POINT.
         self.HP = 1
         
         if self.boss:
-        
+            
+            ## SETS BOSS POSITION TO CENTERED ON THE SCREEN
             self.rect.centerx = ((WIDTH-WIDTH_STREET)/2) + (col * WIDTH_STREET/5 - self.rect.width)
+            ## PUTS BOSS ON TOP OF SCREEN
+            self.rect.y = 5            
             
-            self.rect.y = 5
-            
+            ## GIVES BOSS A RANDOM SPEED BETWEEN -5 AND 5. IF ITS ZERO IT TRIES AGAIN TWICE. 
+            ## 0.075% CHANCE IT STAYS AT 0 AFTER THREE TRIES.
             self.speedx = random.randint(-5,5)
             if self.speedx == 0:
                 self.speedx = random.randint(-5,5)
@@ -68,9 +69,13 @@ class Inimigo(pygame.sprite.Sprite):
 
 
     def update(self):
-        if self.HP <=0:
+        
+        ## IF ITS DEAD, KILL IT, AND MAKE SURE THE CORPSE IS NOT A BOSS.
+        if self.HP <= 0:
             self.kill()
             self.boss = False
+            
+        ## BOSS COLLIDES WITH SIDES AND BOUNCES BACK WITH RANDOM SPEED TOWARD OPPOSITE EDGE.
         if self.boss:
             if self.rect.x <= (WIDTH-WIDTH_STREET)/2:
                 self.speedx = random.randint(2,7)
@@ -79,10 +84,12 @@ class Inimigo(pygame.sprite.Sprite):
                 self.speedx = random.randint(-7,-2)
                 self.rect.x = (WIDTH-WIDTH_STREET)/2 + WIDTH_STREET - self.rect.width
             self.rect.x += self.speedx    
-
+        
+        ## IF ITS ALIVE AND NOT A BOSS, PASS.
         pass
     
     
+    ## DRAGS ENEMY WITH SCREEN.
     def updateSpeed(self, speedy):
         if not self.boss:
             self.rect.top += speedy
