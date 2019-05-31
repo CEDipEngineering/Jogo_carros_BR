@@ -100,7 +100,7 @@ def game_intro():
             text_quit = text_format("QUIT", font, 75, WHITE)
         else:
             text_quit = text_format("QUIT", font, 75, BLACK)
-            text_quit2 = text_format("Press ESC to quit", font, 35, BLACK)
+            text_quit2 = text_format("Close screen to quit", font, 35, BLACK)
                         
         title_rect = title.get_rect()
         start_rect = text_start.get_rect()
@@ -114,18 +114,14 @@ def game_intro():
         clock.tick(FPS)
 #        screen.set_caption("Python - Pygame Simple Main Menu Selection")
         
-def carregar():
-    screen.fill(BLACK)
-    screen.blit(background, (WIDTH/2 - WIDTH_STREET/2,0))
-    i =  3
-    while i != 0:
-        text_iniciate = text_format("{0}".format(i), font, 100, RED)
+def carregar(time):
+    if time % FPS == 0 and time != FPS*3:
+        screen.fill(BLACK)
+        screen.blit(background, (WIDTH/2 - WIDTH_STREET/2,0))
+        text_iniciate = text_format("{0}".format(int((FPS*3-time)/FPS)), font, 100, RED)
         iniciate_rect = text_iniciate.get_rect()
         screen.blit(text_iniciate, (WIDTH/2 - (iniciate_rect[2]/2), 200))
         pygame.display.update()
-        time.sleep(2)
-        screen.blit(background, (WIDTH/2 - WIDTH_STREET/2,0))
-        i = i - 1
 
 def load_fase_screen(img, fase):
     
@@ -275,7 +271,11 @@ def Main():
                 running = game_intro()
                 load_fase_screen(assets['riogsul'],1)
         #        load_fase_screen(assets['riogsul2'])
-                carregar()
+                framecount = 0    
+                while framecount<FPS*3:      
+                    carregar(framecount)
+                    framecount+=1
+                    clock.tick(FPS)
                 BossAlive = False
                 BossKilled = False
                 BossTested = True
@@ -342,8 +342,6 @@ def Main():
                                 player.accY -= player.power
                             if event.key == pygame.K_s:
                                 player.accY += player.power
-                            if event.key == pygame.K_ESCAPE:
-                                pygame.quit()
                             if event.key == pygame.K_LSHIFT and not SPECIAL:
                                 SPECIAL = True
                                 SpecialFrames = 0
@@ -641,8 +639,6 @@ def Main():
                                 player.accY -= player.power
                             if event.key == pygame.K_s:
                                 player.accY += player.power
-                            if event.key == pygame.K_ESCAPE:
-                                pygame.quit()
                             if event.key == pygame.K_LSHIFT:
                                 player.firerate = 0.01
                     
@@ -837,7 +833,7 @@ def Main():
                 
             
             score = counter 
-            highscore(score)
+            highscore(score, 2)
     finally:
         pass
             
