@@ -882,7 +882,7 @@ def Main():
             score = counter 
             highscore(score, 2)
             
-            game_intro('victory', passtype = 'key'):
+            game_intro('victory', passtype = 'key')
     finally:
         pass
             
