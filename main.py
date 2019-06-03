@@ -70,7 +70,8 @@ def game_intro(stage, passtype = 'wait'):
     stages = {'beginfase1': assets['beginfase1'], 
               'beginfase2': assets['beginfase2'], 
               'victory': assets['victory'],
-              'game_over': assets['game_over']}
+              'game_over': assets['game_over'],
+              'controls': assets['controls']}
     menu=True
     if stage not in stages:
         screen.blit(background, (WIDTH/2 - WIDTH_STREET/2,0))
@@ -181,6 +182,7 @@ def load_assets(img_dir):
     assets["victory"] =  pygame.image.load(path.join(img_dir, "victory.png")).convert_alpha()
     assets['beginfase1'] = pygame.image.load(path.join(img_dir,"BeginFase1.png")).convert()
     assets['beginfase2'] = pygame.image.load(path.join(img_dir,"BeginFase2.png")).convert()
+    assets['controls'] = pygame.image.load(path.join(img_dir,"Controles.png")).convert()
     
     return assets
 
@@ -201,6 +203,7 @@ def Transform_Imgs(assets):
     assets['victory'] = pygame.transform.scale(assets['victory'], (WIDTH, HEIGHT))
     assets['beginfase1'] = pygame.transform.scale(assets['beginfase1'], (WIDTH, HEIGHT))
     assets['beginfase2'] = pygame.transform.scale(assets['beginfase2'], (WIDTH, HEIGHT))
+    assets['controls'] = pygame.transform.scale(assets['controls'], (WIDTH, HEIGHT))
     
     return assets
     
@@ -252,7 +255,7 @@ background = assets['background']
 background_rect = background.get_rect()
 shoot_sound = assets['shoot_sound']
 boom_sound = assets['boom_sound'] 
-shoot_sound.set_volume(0.2)
+shoot_sound.set_volume(0.15)
 
 
 
@@ -301,6 +304,7 @@ def Main():
         while game_on:
             try:
                 running = game_intro('beginfase1', passtype = 'key')
+                game_intro('controls', passtype = 'key')
                 load_fase_screen(assets['riogsul'],1)
                 carregar()
                 BossAlive = False
@@ -322,6 +326,7 @@ def Main():
                     if player.HP <= 0:
                         game_intro('game_over', passtype = 'key')
                         running = game_intro('beginfase1', passtype = 'key')
+                        game_intro('controls', passtype = 'key')
                         if running:
                             fired = False
                             fired_cooldown = 0
@@ -337,6 +342,8 @@ def Main():
                             BossAlive = False
                             BossKilled = False
                             BossTested = True
+                            SPECIAL = False
+                            counter = 0
                             carregar()
                             for mob in inimigos:
                                 mob.kill()
@@ -602,6 +609,7 @@ def Main():
                     
                 running2 = game_intro('beginfase2', passtype = 'key')
                 load_fase_screen(assets['riogsul2'],2)
+                game_intro('controls', passtype = 'key')
                 carregar()
                 Boss2Alive = False
                 Boss2Killed = False
@@ -627,6 +635,7 @@ def Main():
                         
                         game_intro('game_over', passtype = 'key')
                         running2 = game_intro('beginfase2', passtype = 'key')
+                        game_intro('controls', passtype = 'key')
                         if running2:
                             fired = False
                             fired_cooldown = 0
@@ -642,6 +651,8 @@ def Main():
                             Boss2Alive = False
                             Boss2Killed = False
                             Boss2Tested = True
+                            SPECIAL = False
+                            counter = 0
                             carregar()
                             for mob in inimigos:
                                 mob.kill()
@@ -883,6 +894,8 @@ def Main():
             highscore(score, 2)
             
             game_intro('victory', passtype = 'key')
+            pygame.quit()
+            pass
     finally:
         pass
             
